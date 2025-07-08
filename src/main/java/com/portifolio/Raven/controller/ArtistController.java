@@ -1,20 +1,22 @@
 package com.portifolio.Raven.controller;
 
-import com.portifolio.Raven.dto.artistDto.ArtistListDto;
-import com.portifolio.Raven.dto.artistDto.RegisterArtistDto;
-import com.portifolio.Raven.dto.artistDto.ArtistDetail;
-import com.portifolio.Raven.dto.artistDto.UpdateArtistDto;
+import com.portifolio.Raven.dto.artistDto.*;
 import com.portifolio.Raven.model.Artist;
 import com.portifolio.Raven.repository.ArtistRepository;
+import com.portifolio.Raven.service.ArtistImageService;
+import com.portifolio.Raven.service.ArtistService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import org.springframework.data.domain.Pageable;
 import java.util.List;
+import java.util.UUID;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -25,6 +27,13 @@ public class ArtistController {
     @Autowired
     private ArtistRepository artistRepository;
 
+    @Autowired
+    private ArtistImageService artistImageService;
+
+
+    @Autowired
+    private ArtistService artistService;
+
 
     @GetMapping
     public ResponseEntity<List<ArtistListDto>>get(Pageable pageable){
@@ -32,21 +41,36 @@ public class ArtistController {
         return ok(ListArtist);
     }
 
-
-    @PostMapping("register")
-    @Transactional
-    public ResponseEntity<ArtistDetail> post(@RequestBody @Valid RegisterArtistDto registerArtistDto, UriComponentsBuilder uriComponentsBuilder){
-        var artistas = new Artist(registerArtistDto);
-        artistRepository.save(artistas);
-        var url = uriComponentsBuilder.path("/artist/{id}").buildAndExpand(artistas.getId()).toUri();
-        return ResponseEntity.created(url).body(new ArtistDetail(artistas));
+    @GetMapping("{id}")
+    public ResponseEntity<ArtistDetail> getByid(@PathVariable("id") UUID id){
+        var artist = artistRepository.getReferenceById(id);
+        return ok(new ArtistDetail(artist));
 
     }
 
 
+   @PostMapping("/register")
+   @Transactional
+   public ResponseEntity<ArtistDetail> post(@RequestBody @Valid RegisterArtistDto dto, UriComponentsBuilder uriBuilder){
+        var artistDetail = artistService.register(dto);
+        var uri = uriBuilder.path("/artist/{id}").buildAndExpand(artistDetail.id()).toUri();
+        return ResponseEntity.created(uri).body(artistDetail);
+   }
+
+    // IMAGEM
+    @PostMapping("/upload/imagem")
+    public ResponseEntity<String> uploadImage(@ModelAttribute ArtistImagemDto dto) {
+        try {
+            String imageUrl = artistImageService.saveImageAsBase64(dto.file(), dto.artistId());
+            return ResponseEntity.ok(imageUrl);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Erro ao salvar a imagem: " + e.getMessage());
+        }
+    }
+
     @PutMapping("/upadate/{id}")
     @Transactional
-    public ResponseEntity<ArtistDetail> put(@PathVariable("id") Long id, @RequestBody UpdateArtistDto dto){
+    public ResponseEntity<ArtistDetail> put(@PathVariable("id") UUID id , @RequestBody UpdateArtistDto dto){
         var artistas = artistRepository.getReferenceById(id);
         artistas.updateArtist(dto);
         return ResponseEntity.ok(new ArtistDetail(artistas));
@@ -55,7 +79,7 @@ public class ArtistController {
 
     @DeleteMapping("{id}")
     @Transactional
-    public ResponseEntity<Void> delete(@PathVariable("id")Long id){
+    public ResponseEntity<Void> delete(@PathVariable("id")UUID id){
         artistRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }

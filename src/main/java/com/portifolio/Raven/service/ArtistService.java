@@ -1,0 +1,49 @@
+package com.portifolio.Raven.service;
+
+import com.portifolio.Raven.dto.artistDto.ArtistDetail;
+import com.portifolio.Raven.dto.artistDto.ArtistListDto;
+import com.portifolio.Raven.dto.artistDto.RegisterArtistDto;
+import com.portifolio.Raven.mappers.ArtistMapper;
+import com.portifolio.Raven.model.Artist;
+import com.portifolio.Raven.repository.ArtistRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ArtistService {
+
+    @Autowired
+    private ArtistRepository artistRepository;
+
+    @Autowired
+    private ArtistMapper artistMapper;
+
+
+    public List<ArtistListDto> listAll(Pageable pageable){
+        return artistRepository.findAll(pageable)
+                .stream()
+                .map(artistMapper::toList)
+                .toList();
+    }
+
+    public ArtistDetail register(RegisterArtistDto dto){
+        boolean exists = artistRepository.existsByNomeArtistIgnoreCase(dto.nomeArtist());
+
+        if (exists) {
+            throw new RuntimeException("Já existe um artista cadastrado com o nome: " + dto.nomeArtist());
+        }
+
+        Artist artist = artistMapper.toEntity(dto);
+        artistRepository.save(artist);
+        return artistMapper.toDetailDto(artist);
+    }
+
+
+
+
+
+
+}
