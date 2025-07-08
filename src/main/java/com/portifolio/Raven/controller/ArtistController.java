@@ -39,7 +39,7 @@ public class ArtistController {
         var artistas = new Artist(registerArtistDto);
         artistRepository.save(artistas);
         var url = uriComponentsBuilder.path("/artist/{id}").buildAndExpand(artistas.getId()).toUri();
-        return ResponseEntity.created(url).body(new ArtistDetail(artistas));
+        return ResponseEntity.created(url).body(new ArtistDetail(artista));
 
     }
 
