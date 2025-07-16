@@ -3,7 +3,7 @@ package com.portifolio.Raven.mappers;
 import com.portifolio.Raven.dto.artistDto.ArtistDetail;
 import com.portifolio.Raven.dto.artistDto.ArtistListDto;
 import com.portifolio.Raven.dto.artistDto.RegisterArtistDto;
-import com.portifolio.Raven.model.Artist;
+import com.portifolio.Raven.entity.Artist;
 import org.springframework.stereotype.Component;
 
 @Component

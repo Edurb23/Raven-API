@@ -1,4 +1,4 @@
-package com.portifolio.Raven.model;
+package com.portifolio.Raven.entity;
 
 
 import com.portifolio.Raven.dto.artistDto.RegisterArtistDto;
@@ -10,6 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,6 +41,25 @@ public class Artist {
 
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
     private List<ArtistImage>artistImages;
+
+
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Instant created_at;
+
+    @Column(name = "update_at")
+    private Instant update_at;
+
+    @PrePersist
+    public void prePersist() {
+        Instant now = Instant.now();
+        created_at = now;
+        update_at = now;
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        update_at = Instant.now();
+    }
 
 
 

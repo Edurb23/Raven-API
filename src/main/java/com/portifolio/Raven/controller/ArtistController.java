@@ -1,17 +1,14 @@
 package com.portifolio.Raven.controller;
 
 import com.portifolio.Raven.dto.artistDto.*;
-import com.portifolio.Raven.model.Artist;
 import com.portifolio.Raven.repository.ArtistRepository;
 import com.portifolio.Raven.service.ArtistImageService;
 import com.portifolio.Raven.service.ArtistService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import org.springframework.data.domain.Pageable;
@@ -57,7 +54,7 @@ public class ArtistController {
         return ResponseEntity.created(uri).body(artistDetail);
    }
 
-    // IMAGEM
+
     @PostMapping("/upload/imagem")
     public ResponseEntity<String> uploadImage(@ModelAttribute ArtistImagemDto dto) {
         try {

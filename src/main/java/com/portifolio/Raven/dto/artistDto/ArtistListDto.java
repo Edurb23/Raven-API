@@ -1,6 +1,6 @@
 package com.portifolio.Raven.dto.artistDto;
 
-import com.portifolio.Raven.model.Artist;
+import com.portifolio.Raven.entity.Artist;
 
 import java.util.UUID;
 

@@ -1,7 +1,7 @@
 package com.portifolio.Raven.dto.artistDto;
 
-import com.portifolio.Raven.model.Artist;
-import com.portifolio.Raven.model.ArtistImage;
+import com.portifolio.Raven.entity.Artist;
+import com.portifolio.Raven.entity.ArtistImage;
 
 import java.util.List;
 import java.util.UUID;
