@@ -43,22 +43,11 @@ public class ArtistController {
 
 
     @GetMapping("{id}")
-    public ResponseEntity<ArtistDetail> getByid(@PathVariable("id") UUID id){
+    public ResponseEntity<ArtistDetail> getByid(@PathVariable("id") UUID id) {
         var artist = artistRepository.getReferenceById(id);
         return ok(new ArtistDetail(artist));
 
-
-    @PostMapping("register")
-    @Transactional
-    public ResponseEntity<ArtistDetail> post(@RequestBody @Valid RegisterArtistDto registerArtistDto, UriComponentsBuilder uriComponentsBuilder){
-        var artistas = new Artist(registerArtistDto);
-        artistRepository.save(artistas);
-        var url = uriComponentsBuilder.path("/artist/{id}").buildAndExpand(artistas.getId()).toUri();
-        return ResponseEntity.created(url).body(new ArtistDetail(artista));
-
-
     }
-
 
    @PostMapping("/register")
    @Transactional
