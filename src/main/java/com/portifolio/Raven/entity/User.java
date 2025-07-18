@@ -52,12 +52,6 @@ public class User  implements UserDetails {
     @Column(name = "status", nullable = false)
     private Boolean status;
 
-    public void prePersistStatus(){
-        if(status ==  null){
-            status = true;
-        }
-    }
-
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant created_at;
 
@@ -69,6 +63,10 @@ public class User  implements UserDetails {
         Instant now = Instant.now();
         created_at = now;
         update_at = now;
+        if (status == null) {
+            status = true;
+        }
+
     }
 
     @PreUpdate

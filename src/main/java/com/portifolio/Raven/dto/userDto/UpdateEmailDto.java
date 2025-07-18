@@ -2,18 +2,11 @@ package com.portifolio.Raven.dto.userDto;
 
 import jakarta.validation.constraints.NotBlank;
 
-public record RegisterUserDto(
-
+public record UpdateEmailDto(
         @NotBlank
-        String username,
-        @NotBlank
-        String email,
+        String newemail,
         @NotBlank
         String password
-
-
-
-
 
 
 ) {
