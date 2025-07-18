@@ -4,9 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 
 public record UpdateEmailDto(
         @NotBlank
-        String newemail,
-        @NotBlank
-        String password
+        String email
+
 
 
 ) {

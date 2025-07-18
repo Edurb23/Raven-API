@@ -20,20 +20,29 @@ public class UserMapper {
         return new UserList(user);
     }
 
-    public User updateUsername(User user, UpdateUsernameDto dto){
-        user.setUsername(dto.Newusername());
+    public User updateEmail(User user, UpdateEmailDto dto) {
+        user.setEmail(dto.email());
         return user;
     }
 
-    public User updateEmail(User user, UpdateEmailDto dto){
-        user.setEmail(dto.newemail());
-        return user;
-    }
 
-    public User updatePassword(User user, String newpassword ){
-        user.setPassword(newpassword);
-        return user;
-    }
+
+
+
+//    public User updateUsername(User user, UpdateUsernameDto dto){
+//        user.setUsername(dto.Newusername());
+//        return user;
+//    }
+//
+//    public User updateEmail(User user, UpdateEmailDto dto){
+//        user.setEmail(dto.newemail());
+//        return user;
+//    }
+//
+//    public User updatePassword(User user, String newpassword ){
+//        user.setPassword(newpassword);
+//        return user;
+//    }
 
 
 

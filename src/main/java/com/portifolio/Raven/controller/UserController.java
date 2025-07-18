@@ -37,11 +37,6 @@ public class UserController {
         return ok(userDetail);
     }
 
-    @GetMapping("/me")
-    public ResponseEntity<UserDetail> getCurrentUser(){
-        var userCurrent = userService.getCurrentUser();
-        return ResponseEntity.ok(userCurrent);
-    }
 
     @PostMapping("/register")
     public ResponseEntity<UserDetail> post(@RequestBody @Valid RegisterUserDto dto, UriComponentsBuilder builder){
@@ -50,22 +45,49 @@ public class UserController {
         return ResponseEntity.created(uri).body(userDetail);
     }
 
-    @PutMapping("/me/username")
-    public ResponseEntity<UserDetail> updateUsername(@RequestBody @Valid UpdateUsernameDto dto){
-        UserDetail updateUser = userService.updateUsername(dto);
-        return ResponseEntity.ok(updateUser);
+
+
+    @PutMapping("/{id}/email")
+    public ResponseEntity<UserDetail> updateEmail(@PathVariable("id") UUID id,
+                                                  @RequestBody @Valid UpdateEmailDto dto){
+        UserDetail updated = userService.updateEmail(id, dto);
+        return ResponseEntity.ok(updated);
+
     }
 
-    @PutMapping("/me/email")
-    public ResponseEntity<UserDetail> updateEmail(@RequestBody @Valid UpdateEmailDto dto){
-        UserDetail updateEmail = userService.updateEmail(dto);
-        return ResponseEntity.ok(updateEmail);
+
+    @PutMapping("/{id}/username")
+    public ResponseEntity<UserDetail> updateUsername(@PathVariable("id") UUID id,
+                                                     @RequestBody @Valid UpdateUsernameDto dto){
+        UserDetail updated = userService.updateUsername(id, dto);
+        return ResponseEntity.ok(updated);
     }
+
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable("id") UUID id){
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
+
+   /*
+     //   @GetMapping("/me")
+ //   public ResponseEntity<UserDetail> getCurrentUser(){
+    //        var userCurrent = userService.getCurrentUser();
+    //        return ResponseEntity.ok(userCurrent);
+    //    }
+
+
+
+
+
 
     @PutMapping("/me/password")
     public ResponseEntity<UserDetail> updatePassword(@RequestBody @Valid UpdatePassword dto){
         UserDetail updatePassowrd = userService.updatePassword(dto);
         return ResponseEntity.ok(updatePassowrd);
-    }
+    }*/
 
 }

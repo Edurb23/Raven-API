@@ -56,7 +56,43 @@ public class UserService {
         return userMapper.userDetail(user);
     }
 
-    public UserDetail getCurrentUser(){
+    @Transactional
+    public UserDetail updateEmail(UUID id, UpdateEmailDto dto){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        if(!user.getEmail().equals(dto.email()) && userRepository.existsByEmail(dto.email())){
+            throw new RuntimeException("Esse email já está em uso.");
+        }
+        user.setEmail(dto.email());
+        userRepository.save(user);
+
+        return userMapper.userDetail(user);
+    }
+
+    @Transactional
+    public UserDetail updateUsername(UUID id, UpdateUsernameDto dto){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        if(!user.getUsername().equals(dto.Newusername()) && userRepository.existsByUsername(dto.Newusername())){
+            throw new RuntimeException("Esse username já está em uso.");
+        }
+        user.setUsername(dto.Newusername());
+        userRepository.save(user);
+        return userMapper.userDetail(user);
+    }
+
+    @Transactional
+    public void deleteUser(UUID id){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        user.setStatus(false);
+        userRepository.save(user);
+    }
+
+
+
+
+   /* public UserDetail getCurrentUser(){
         var principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userMapper.userDetail(principal);
     }
@@ -85,7 +121,6 @@ public class UserService {
 
     }
 
-
     public UserDetail updatePassword(UpdatePassword dto){
         User user = getCurrentAuthenticatedUser();
 
@@ -97,7 +132,7 @@ public class UserService {
         userRepository.save(user);
         return new UserDetail(user);
 
-    }
+    } */
 
 
 
