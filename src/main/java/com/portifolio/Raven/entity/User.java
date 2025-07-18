@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -19,7 +20,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "users")
+@Table(name = "TB_RAVEN_USERS")
 public class User  implements UserDetails {
 
 
@@ -39,6 +40,23 @@ public class User  implements UserDetails {
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "tb_raven_user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles;
+
+    @Column(name = "status", nullable = false)
+    private Boolean status;
+
+    public void prePersistStatus(){
+        if(status ==  null){
+            status = true;
+        }
+    }
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant created_at;

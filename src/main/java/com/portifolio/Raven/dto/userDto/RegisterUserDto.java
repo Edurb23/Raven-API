@@ -9,7 +9,9 @@ public record RegisterUserDto(
         @NotBlank
         String email,
         @NotBlank
-        String password
+        String password,
+        @NotBlank
+        Boolean status
 
 
 

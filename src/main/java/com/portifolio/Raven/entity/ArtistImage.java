@@ -16,7 +16,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "artist_image")
+@Table(name = "TB_RAVEN_ARTIST_IMAGE")
 public class ArtistImage {
 
     @Id

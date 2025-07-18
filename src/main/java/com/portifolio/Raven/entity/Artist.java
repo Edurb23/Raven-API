@@ -12,13 +12,14 @@ import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name= "artists")
+@Table(name= "TB_RAVEN_ARTISTS")
 public class Artist {
 
     @Id
@@ -28,20 +29,24 @@ public class Artist {
     @Column(name = "id", nullable = false, updatable = false, columnDefinition = "VARCHAR(36)")
     private UUID id;
 
-
-
     @Column(name = "name", nullable = false)
     private String nomeArtist;
 
-    @Column(name= "genre", nullable = false)
-    private String genero;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "tb_raven_genero_artist",
+            joinColumns = @JoinColumn(name = "artist_id"),
+            inverseJoinColumns = @JoinColumn(name = "genero_id")
+    )
+    private Set<Genero> generos;
+
     @Lob
     @Column(name= "bio", nullable = false, columnDefinition = "MEDIUMTEXT")
     private String biografia;
 
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
     private List<ArtistImage>artistImages;
-
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant created_at;
@@ -62,19 +67,9 @@ public class Artist {
     }
 
 
-
-    public Artist(@Valid RegisterArtistDto registerArtistDto){
-        nomeArtist = registerArtistDto.nomeArtist();
-        genero = registerArtistDto.genero();
-        biografia = registerArtistDto.biografia();
-    }
-
-
     public void updateArtist(UpdateArtistDto dto) {
         if(dto.nomeArtist() != null)
             nomeArtist = dto.nomeArtist();
-        if(dto.genero() != null)
-            genero = dto.genero();
         if(dto.biografia() != null)
             biografia = dto.biografia();
 
