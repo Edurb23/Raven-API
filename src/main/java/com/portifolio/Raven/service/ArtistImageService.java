@@ -1,12 +1,10 @@
 package com.portifolio.Raven.service;
 
-import com.portifolio.Raven.model.Artist;
-import com.portifolio.Raven.model.ArtistImage;
+import com.portifolio.Raven.entity.Artist;
+import com.portifolio.Raven.entity.ArtistImage;
 import com.portifolio.Raven.repository.ArtistImageRepository;
 import com.portifolio.Raven.repository.ArtistRepository;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

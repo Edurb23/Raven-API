@@ -4,7 +4,7 @@ import com.portifolio.Raven.dto.artistDto.ArtistDetail;
 import com.portifolio.Raven.dto.artistDto.ArtistListDto;
 import com.portifolio.Raven.dto.artistDto.RegisterArtistDto;
 import com.portifolio.Raven.mappers.ArtistMapper;
-import com.portifolio.Raven.model.Artist;
+import com.portifolio.Raven.entity.Artist;
 import com.portifolio.Raven.repository.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;

@@ -37,10 +37,12 @@ public class ArtistController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<ArtistDetail> getById(@PathVariable("id") UUID id) {
+    public ResponseEntity<ArtistDetail> getByid(@PathVariable("id") UUID id) {
         var artist = artistRepository.getReferenceById(id);
         return ok(new ArtistDetail(artist));
     }
+
+  
 
     @PostMapping("/register")
     @Transactional
@@ -50,7 +52,9 @@ public class ArtistController {
         return ResponseEntity.created(uri).body(artistDetail);
     }
 
+
     // Upload de imagem
+
     @PostMapping("/upload/imagem")
     public ResponseEntity<String> uploadImage(@ModelAttribute ArtistImagemDto dto) {
         try {

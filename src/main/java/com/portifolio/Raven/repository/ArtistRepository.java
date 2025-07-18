@@ -1,6 +1,6 @@
 package com.portifolio.Raven.repository;
 
-import com.portifolio.Raven.model.Artist;
+import com.portifolio.Raven.entity.Artist;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
