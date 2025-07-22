@@ -9,7 +9,7 @@ public record RegisterArtistDto(
 
         @NotBlank
         String nomeArtist,
-        @NotBlank
+
         Set<String> generos,
         @NotBlank
         String biografia

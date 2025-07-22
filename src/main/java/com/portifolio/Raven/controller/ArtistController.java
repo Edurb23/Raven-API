@@ -31,18 +31,16 @@ public class ArtistController {
     private ArtistService artistService;
 
     @GetMapping
-    public ResponseEntity<List<ArtistListDto>> get(Pageable pageable) {
-        var listArtist = artistRepository.findAll().stream().map(ArtistListDto::new).toList();
-        return ok(listArtist);
+    public ResponseEntity<List<ArtistListDto>> getAll(Pageable pageable) {
+        var artists = artistService.listAll(pageable);
+        return ResponseEntity.ok(artists);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<ArtistDetail> getByid(@PathVariable("id") UUID id) {
-        var artist = artistRepository.getReferenceById(id);
-        return ok(new ArtistDetail(artist));
+    @GetMapping("/{id}")
+    public ResponseEntity<ArtistDetail> getById(@PathVariable UUID id) {
+        var artist = artistService.findById(id);
+        return ResponseEntity.ok(artist);
     }
-
-  
 
     @PostMapping("/register")
     @Transactional
@@ -52,6 +50,21 @@ public class ArtistController {
         return ResponseEntity.created(uri).body(artistDetail);
     }
 
+
+    @PutMapping("/update/{id}")
+    @Transactional
+    public ResponseEntity<ArtistDetail> update(@PathVariable UUID id, @RequestBody UpdateArtistDto dto) {
+        var artist = artistService.update(id, dto);
+        var response = new ArtistDetail(artist);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+        artistService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
     // Upload de imagem
 
@@ -63,20 +76,5 @@ public class ArtistController {
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Erro ao salvar a imagem: " + e.getMessage());
         }
-    }
-
-    @PutMapping("/update/{id}")
-    @Transactional
-    public ResponseEntity<ArtistDetail> put(@PathVariable("id") UUID id, @RequestBody UpdateArtistDto dto) {
-        var artist = artistRepository.getReferenceById(id);
-        artist.updateArtist(dto);
-        return ResponseEntity.ok(new ArtistDetail(artist));
-    }
-
-    @DeleteMapping("{id}")
-    @Transactional
-    public ResponseEntity<Void> delete(@PathVariable("id") UUID id) {
-        artistRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
     }
 }

@@ -80,10 +80,6 @@ public class UserController {
     //    }
 
 
-
-
-
-
     @PutMapping("/me/password")
     public ResponseEntity<UserDetail> updatePassword(@RequestBody @Valid UpdatePassword dto){
         UserDetail updatePassowrd = userService.updatePassword(dto);
