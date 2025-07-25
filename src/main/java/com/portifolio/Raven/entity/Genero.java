@@ -1,10 +1,7 @@
 package com.portifolio.Raven.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -17,6 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "TB_RAVEN_GENERO")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Genero {
 
     @EqualsAndHashCode.Include
@@ -31,6 +29,7 @@ public class Genero {
     private String nome;
 
     @ManyToMany(mappedBy = "generos")
+    @ToString.Exclude
     private Set<Artist> artists;
 
 

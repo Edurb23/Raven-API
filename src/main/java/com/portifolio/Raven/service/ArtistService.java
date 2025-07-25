@@ -10,6 +10,7 @@ import com.portifolio.Raven.repository.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -32,10 +33,18 @@ public class ArtistService {
     }
 
     public ArtistDetail findById(UUID id) {
-        var artist = artistRepository.getReferenceById(id);
+        var artist = artistRepository.findWithGeneros(id)
+                .orElseThrow(() -> new RuntimeException("Artista não encontrado"));
         return artistMapper.toDetailDto(artist);
     }
 
+
+
+    public ArtistDetail toDetailDto(Artist artist){
+        return new ArtistDetail(artist);
+    }
+
+    @Transactional
     public ArtistDetail register(RegisterArtistDto dto){
         boolean exists = artistRepository.existsByNomeArtistIgnoreCase(dto.nomeArtist());
 

@@ -15,7 +15,6 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.UUID;
 
-import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping("artist")
@@ -38,9 +37,11 @@ public class ArtistController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ArtistDetail> getById(@PathVariable UUID id) {
-        var artist = artistService.findById(id);
-        return ResponseEntity.ok(artist);
+        ArtistDetail detail = artistService.findById(id);
+        System.out.println(detail.generos());
+        return ResponseEntity.ok(detail);
     }
+
 
     @PostMapping("/register")
     @Transactional

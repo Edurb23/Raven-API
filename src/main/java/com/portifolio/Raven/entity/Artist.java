@@ -33,7 +33,7 @@ public class Artist {
     private String nomeArtist;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(
             name = "tb_raven_genero_artist",
             joinColumns = @JoinColumn(name = "artist_id"),
