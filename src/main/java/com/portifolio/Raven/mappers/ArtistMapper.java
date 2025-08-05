@@ -44,23 +44,16 @@ public class ArtistMapper {
     }
 
 
-    @Transactional
-    public ArtistDetail update(UUID id, UpdateArtistDto dto) {
-        Artist artist = artistRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Artista não encontrado"));
-
-        artist.updateArtist(dto);
-
-        if (dto.generos() != null) {
-            Set<Genero> generos = dto.generos().stream()
-                    .map(gid -> generoRepository.findById(gid)
-                            .orElseThrow(() -> new RuntimeException("Gênero não encontrado: " + gid)))
-                    .collect(Collectors.toSet());
-            artist.setGeneros(generos);
+    public void update(UpdateArtistDto dto, Artist artist) {
+        if (dto.nomeArtist() != null && !dto.nomeArtist().isBlank()) {
+            artist.setNomeArtist(dto.nomeArtist());
         }
 
-        return new ArtistDetail(artist);
+        if (dto.biografia() != null && !dto.biografia().isBlank()) {
+            artist.setBiografia(dto.biografia());
+        }
     }
+
 
     public ArtistDetail toDetailDto(Artist artist){
         Set<String> nomesGeneros = artist.getGeneros().stream()

@@ -4,16 +4,20 @@ import com.portifolio.Raven.dto.artistDto.ArtistDetail;
 import com.portifolio.Raven.dto.artistDto.ArtistListDto;
 import com.portifolio.Raven.dto.artistDto.RegisterArtistDto;
 import com.portifolio.Raven.dto.artistDto.UpdateArtistDto;
+import com.portifolio.Raven.entity.Genero;
 import com.portifolio.Raven.mappers.ArtistMapper;
 import com.portifolio.Raven.entity.Artist;
 import com.portifolio.Raven.repository.ArtistRepository;
+import com.portifolio.Raven.repository.GeneroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class ArtistService {
@@ -23,6 +27,9 @@ public class ArtistService {
 
     @Autowired
     private ArtistMapper artistMapper;
+
+    @Autowired
+    private GeneroRepository generoRepository;
 
 
     public List<ArtistListDto> listAll(Pageable pageable){
@@ -58,11 +65,25 @@ public class ArtistService {
     }
 
 
+    @Transactional
     public Artist update(UUID id, UpdateArtistDto dto) {
-        var artist = artistRepository.getReferenceById(id);
-        artist.updateArtist(dto);
+        Artist artist = artistRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Artista não encontrado"));
+
+        artistMapper.update(dto, artist);
+
+        if (dto.generos() != null) {
+            Set<Genero> generos = dto.generos().stream()
+                    .map(gid -> generoRepository.findById(gid)
+                            .orElseThrow(() -> new RuntimeException("Gênero não encontrado: " + gid)))
+                    .collect(Collectors.toSet());
+            artist.setGeneros(generos);
+        }
+
         return artist;
     }
+
+
 
     public void delete(UUID id) {
         artistRepository.deleteById(id);
