@@ -1,5 +1,6 @@
 package com.portifolio.Raven.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -30,6 +31,7 @@ public class Genero {
 
     @ManyToMany(mappedBy = "generos")
     @ToString.Exclude
+    @JsonIgnore
     private Set<Artist> artists;
 
 
