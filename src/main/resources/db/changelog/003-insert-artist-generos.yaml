@@ -1,0 +1,269 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 020-artist-genre-relations
+      author: edu
+      changes:
+
+        # --- POP ARTISTS ---
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Ariana Grande' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Pop' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Ariana Grande' )" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='R&B' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Ariana Grande' )" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Trap' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Ariana Grande' )" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Hip-Hop' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Dua Lipa' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Pop' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Dua Lipa' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Dance Pop' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Lady Gaga' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Pop' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Charli XCX' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Hyperpop' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Charli XCX' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Pop' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Lana Del Rey' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Dream Pop' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='The Weeknd' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='R&B' LIMIT 1)" }
+
+        # --- KPOP ---
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='BLACKPINK' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='K-Pop' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='TWICE' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='K-Pop' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='AESPA' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='K-Pop' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='LE SSERAFIM' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='K-Pop' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='NEWJEANS' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='K-Pop' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='JENNIE' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='K-Pop' LIMIT 1)" }
+
+        # --- ROCK ---
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Nirvana' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Grunge' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Arctic Monkeys' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Indie Rock' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Black Sabbath' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Heavy Metal' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Pink Floyd' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Progressive Rock' LIMIT 1)" }
+
+        # --- RAP ---
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Travis Scott' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Trap' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Travis Scott' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Rap' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Travis Scott' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Hip-Hop' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Kanye West' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Hip-Hop' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='A$AP Rocky' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Alternative Hip-Hop' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Playboi Carti' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Cloud Rap' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Playboi Carti' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Trap' LIMIT 1)" }
+
+        # --- ELETRÔNICA ---
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Daft Punk' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='EDM' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Calvin Harris' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='House' LIMIT 1)" }
+
+        # --- BR ---
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Jorge Ben Jor' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='MPB' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Milton Nascimento' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='MPB' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Matuê' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Trap' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Anitta' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Funk Carioca' LIMIT 1)" }
+
+  - changeSet:
+      id: 021-artist-genre-relations-extra
+      author: edu
+      changes:
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Tyler, The Creator' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Alternative Hip-Hop' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Frank Ocean' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Alternative Hip-Hop' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Rosalía' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Latin Trap' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='2Pac' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Gangsta Rap' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Ice Cube' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Gangsta Rap' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Eazy-E' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Gangsta Rap' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='JAY-Z' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Hip-Hop' LIMIT 1)" }
+
+        - insert:
+            tableName: tb_raven_genero_artist
+            columns:
+              - column: { name: artist_id, valueComputed: "(SELECT id FROM tb_raven_artists WHERE name='Kendrick Lamar' LIMIT 1)" }
+              - column: { name: genero_id, valueComputed: "(SELECT id FROM tb_raven_genero WHERE nome='Hip-Hop' LIMIT 1)" }
