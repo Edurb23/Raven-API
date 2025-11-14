@@ -1,0 +1,112 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 001-insert-generos-rock
+      author: edu
+      changes:
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Rock' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Hard Rock' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Indie Rock' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Punk Rock' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Pop Rock' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Alternative Rock' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Progressive Rock' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Symphonic Rock' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Grunge' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Garage Rock' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Glam Rock' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Psychedelic Rock' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Math Rock' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Shoegaze' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Post-Rock' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Metal' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Heavy Metal' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Thrash Metal' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Black Metal' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Death Metal' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Power Metal' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Symphonic Metal' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Metalcore' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Nu Metal' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Doom Metal' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Sludge Metal' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Gothic Metal' } } ] }
+
+  - changeSet:
+      id: 002-insert-generos-rap
+      author: edu
+      changes:
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Rap' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Hip-Hop' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Trap' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Drill' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Boom Bap' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Gangsta Rap' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Emo Trap' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Phonk' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Cloud Rap' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Alternative Hip-Hop' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Latin Trap' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Brazilian Trap' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Brazilian Rap' } } ] }
+
+  - changeSet:
+      id: 003-insert-generos-eletronica
+      author: edu
+      changes:
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'EDM' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'House' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Deep House' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Progressive House' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Tech House' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Electro House' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Trance' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Psytrance' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Techno' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Minimal Techno' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Drum and Bass' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Jungle' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Dubstep' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Future Bass' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Lo-fi Hip-Hop' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Ambient' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Vaporwave' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Synthwave' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Darkwave' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Retrowave' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Hardcore' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Industrial' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Eurodance' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Electroclash' } } ] }
+
+  - changeSet:
+      id: 004-insert-generos-pop
+      author: edu
+      changes:
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Pop' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Pop Rock' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Dance Pop' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Electropop' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Hyperpop' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Teen Pop' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Indie Pop' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Dream Pop' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'K-Pop' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'J-Pop' } } ] }
+
+  - changeSet:
+      id: 005-insert-generos-brasil
+      author: edu
+      changes:
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'MPB' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Samba' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Pagode' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Forró' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Bossa Nova' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Funk Carioca' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Funk Paulista' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Sertanejo' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Piseiro' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Axé' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Frevo' } } ] }
+        - insert: { tableName: tb_raven_genero, columns: [ { column: { name: id, valueComputed: UUID() } }, { column: { name: nome, value: 'Maracatu' } } ] }
