@@ -2,7 +2,7 @@
 
 ---
 
-## 🇺🇸 EN — English Version
+##  EN — English Version
 
 The **Raven** project was created for music lovers who want a modern platform to explore artists, genres, and musical information.  
 It combines internal data with real information consumed from the **Spotify Public API**, all running on a well‑structured environment using **Spring Boot, Docker, and Liquibase**.
@@ -32,7 +32,7 @@ It combines internal data with real information consumed from the **Spotify Publ
 
 ---
 
-## 🇧🇷 BR — Versão em Português
+##  BR — Versão em Português
 
 O **Raven** é um projeto criado para amantes de música que desejam uma plataforma moderna para explorar artistas, gêneros e informações musicais.  
 O sistema combina dados internos com informações reais da **API Pública do Spotify**, rodando em um ambiente bem estruturado com **Spring Boot, Docker e Liquibase**.
