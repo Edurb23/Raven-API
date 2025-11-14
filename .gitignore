@@ -67,3 +67,15 @@ Thumbs.db
 *.h2.db
 *.mv.db
 *.sqlite
+# ----------------------
+# DOCKERFILE E DOCKER-COMPOSE
+# ----------------------
+Dockerfile
+dockerfile
+docker-compose.yml
+docker-compose.yaml
+docker-compose.*.yaml
+compose.yml
+compose.yaml
+compose.*.yml
+compose.*.yaml

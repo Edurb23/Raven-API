@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/001-insert-generos.yaml
+  - include:
+      file: db/changelog/002-insert-artist.yaml
+  - include:
+      file: db/changelog/003-insert-artist-generos.yaml

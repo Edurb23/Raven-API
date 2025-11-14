@@ -1,0 +1,311 @@
+databaseChangeLog:
+  - changeSet:
+      id: 010-insert-artistas-pop
+      author: edu
+      changes:
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Ariana Grande' } },
+          { column: { name: bio, value: 'Ariana Grande é uma cantora, atriz e compositora americana que começou na Nickelodeon e se tornou uma das maiores vozes do pop mundial, vencendo Grammys e estrelando produções de cinema e teatro.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Dua Lipa' } },
+          { column: { name: bio, value: 'Dua Lipa é uma cantora anglo-albanesa que se tornou ícone global do pop com sua mistura de disco, dance e estética moderna, conquistando prêmios e dominando paradas mundiais.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Lady Gaga' } },
+          { column: { name: bio, value: 'Lady Gaga é uma das artistas mais influentes do pop, conhecida por seu vocal poderoso, estética inovadora e talento para atuar, incluindo o Oscar por Shallow.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Charli XCX' } },
+          { column: { name: bio, value: 'Charli XCX é uma das principais figuras do pop experimental, criando sonoridades futuristas e influenciando uma geração inteira de artistas.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Lana Del Rey' } },
+          { column: { name: bio, value: 'Lana Del Rey é conhecida pelo estilo melancólico, cinematográfico e nostálgico, marcada por letras intensas e um dos catálogos mais influentes do pop alternativo.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'The Weeknd' } },
+          { column: { name: bio, value: 'The Weeknd é um dos maiores nomes do R&B contemporâneo, combinando identidade misteriosa, produção impecável e hits globais que marcaram a música pop.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+  - changeSet:
+      id: 011-insert-artistas-kpop
+      author: edu
+      changes:
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'BLACKPINK' } },
+          { column: { name: bio, value: 'BLACKPINK é um dos maiores grupos de K-pop do mundo, unindo membros internacionais e construindo uma presença global com hits explosivos e estética poderosa.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'TWICE' } },
+          { column: { name: bio, value: 'TWICE é um dos grupos femininos mais influentes do K-pop, conhecido por conceito vibrante, coreografias icônicas e sucesso massivo desde o debut em 2015.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'AESPA' } },
+          { column: { name: bio, value: 'AESPA revolucionou o K-pop ao misturar idols reais e avatares virtuais, representando o futuro do pop com conceito tecnológico e sonoridade intensa.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'LE SSERAFIM' } },
+          { column: { name: bio, value: 'LE SSERAFIM se destaca no K-pop por seu conceito de confiança e atitude forte, combinando técnica, personalidade e presença global crescente.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'NEWJEANS' } },
+          { column: { name: bio, value: 'NewJeans renovou o K-pop com sonoridade fresh, estética minimalista e uma abordagem geracional que redefiniu tendências na música pop mundial.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'JENNIE' } },
+          { column: { name: bio, value: 'Jennie é uma das artistas mais influentes do K-pop, unindo talento, moda e impacto global, tanto como integrante do BLACKPINK quanto em carreira solo.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+  - changeSet:
+      id: 012-insert-artistas-rock
+      author: edu
+      changes:
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Nirvana' } },
+          { column: { name: bio, value: 'Nirvana revolucionou o rock com o grunge, transformando a música nos anos 90 e deixando um legado eterno após a liderança de Kurt Cobain.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Arctic Monkeys' } },
+          { column: { name: bio, value: 'Arctic Monkeys se tornou um dos maiores nomes do rock moderno, unindo letras afiadas, som indie e evolução constante em cada álbum.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Black Sabbath' } },
+          { column: { name: bio, value: 'Black Sabbath é pioneiro do heavy metal, criando sonoridade sombria e influenciando gerações de bandas por mais de 50 anos.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Pink Floyd' } },
+          { column: { name: bio, value: 'Pink Floyd marcou a história com rock progressivo, álbuns conceituais e experiências sonoras que redefiniram a música moderna.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+  - changeSet:
+      id: 013-insert-artistas-rap
+      author: edu
+      changes:
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Travis Scott' } },
+          { column: { name: bio, value: 'Travis Scott é um dos maiores nomes do trap, unindo estética futurista, shows imersivos e hits globais que moldaram o rap moderno.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Kanye West' } },
+          { column: { name: bio, value: 'Kanye West é um dos artistas mais influentes da música, redefinindo o rap e a moda com sua criatividade, controvérsia e impacto cultural gigantesco.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'A$AP Rocky' } },
+          { column: { name: bio, value: 'A$AP Rocky é referência em estilo, estética e sonoridade no hip-hop, combinando elegância visual e uma identidade musical inovadora.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Playboi Carti' } },
+          { column: { name: bio, value: 'Playboi Carti influenciou uma geração com seu estilo minimalista, vocais experimentais e estética vamp futurista que se tornou fenômeno cultural.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+
+  - changeSet:
+      id: 014-insert-artistas-eletronica
+      author: edu
+      changes:
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Daft Punk' } },
+          { column: { name: bio, value: 'Daft Punk moldou a música eletrônica moderna com sua estética futurista, perfeccionismo e fusão de house, disco e tecnologia.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Calvin Harris' } },
+          { column: { name: bio, value: 'Calvin Harris é um dos maiores produtores de EDM, criando hits globais que definiram o pop eletrônico da última década.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+  - changeSet:
+      id: 016-insert-artistas
+      author: edu
+      changes:
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Tyler, The Creator' } },
+          { column: { name: bio, value: 'Tyler, The Creator é um dos artistas mais criativos e disruptivos da música contemporânea, misturando hip-hop alternativo, jazz e soul com um estilo visual cinematográfico e ousado que redefine a arte dentro do rap.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Frank Ocean' } },
+          { column: { name: bio, value: 'Frank Ocean revolucionou o R&B moderno com poesia emocional e sonoridade minimalista, criando obras introspectivas que estabeleceram um novo padrão artístico no gênero.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Rosalía' } },
+          { column: { name: bio, value: 'Rosalía combina flamenco moderno, pop experimental e estética vanguardista, trazendo inovação e impacto global à música latina contemporânea.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Jorge Ben Jor' } },
+          { column: { name: bio, value: 'Jorge Ben Jor é um dos pilares da música brasileira, criador do samba rock e dono de um estilo inconfundível que influenciou gerações com seu swing, poesia e inovação sonora.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Milton Nascimento' } },
+          { column: { name: bio, value: 'Milton Nascimento é uma das maiores vozes da música mundial, unindo espiritualidade, emoção e sofisticação musical em álbuns icônicos que marcaram a MPB.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Matuê' } },
+          { column: { name: bio, value: 'Matuê elevou o trap brasileiro a novos patamares com estética ousada, produção refinada e melodias marcantes que redefiniram o rap nacional contemporâneo.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Ramones' } },
+          { column: { name: bio, value: 'Ramones foram pioneiros do punk rock, conhecidos por músicas rápidas, energia crua e atitude rebelde que influenciaram profundamente a cultura do rock mundial.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Anitta' } },
+          { column: { name: bio, value: 'Anitta é uma das artistas brasileiras mais internacionais da história, misturando pop, reggaeton e funk carioca com versatilidade, impacto cultural e presença global.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: '2Pac' } },
+          { column: { name: bio, value: '2Pac é um dos maiores nomes do hip-hop, conhecido por poesia social, intensidade lírica e visão política que marcaram para sempre a cultura do rap.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Ice Cube' } },
+          { column: { name: bio, value: 'Ice Cube foi figura central no gangsta rap, combinando crítica social, letras afiadas e atitude marcante como membro do lendário N.W.A.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Eazy-E' } },
+          { column: { name: bio, value: 'Eazy-E é considerado o pai do gangsta rap, com flow marcante, postura ousada e impacto cultural duradouro como fundador do N.W.A.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'JAY-Z' } },
+          { column: { name: bio, value: 'JAY-Z é um dos maiores rappers e empreendedores da história, unindo lirismo afiado, visão estratégica e legado cultural imenso dentro do hip-hop.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Kendrick Lamar' } },
+          { column: { name: bio, value: 'Kendrick Lamar é reconhecido como um dos maiores gênios líricos da atualidade, trazendo profundidade artística e relevância social para o rap contemporâneo.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
