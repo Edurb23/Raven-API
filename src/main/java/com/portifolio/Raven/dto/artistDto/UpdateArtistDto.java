@@ -1,18 +1,19 @@
 package com.portifolio.Raven.dto.artistDto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-
-
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Set;
 import java.util.UUID;
 
 public record UpdateArtistDto(
-    
+
+
+        @Schema(description = "nomeArtists", example = "Artist or band name")
         String nomeArtist,
 
+        @Schema(description = "generos", example = "List of genre IDs")
         Set<UUID> generos,
 
+        @Schema(description = "biografia", example = "Artist biography")
         String biografia
 ) {
 }
