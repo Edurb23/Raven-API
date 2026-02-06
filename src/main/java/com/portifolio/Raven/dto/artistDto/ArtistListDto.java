@@ -3,6 +3,7 @@ package com.portifolio.Raven.dto.artistDto;
 import com.portifolio.Raven.entity.Artist;
 import com.portifolio.Raven.entity.ArtistImage;
 import com.portifolio.Raven.entity.Genero;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.Instant;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Schema(description = "DTO of artist")
 public record ArtistListDto(UUID idd, String nameArtist, Set<String> generos, String biografia, List<ArtistImage>artistImages,
                             Instant created_at, Instant update_at) {
 
