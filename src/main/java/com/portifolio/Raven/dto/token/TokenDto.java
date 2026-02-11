@@ -1,4 +1,15 @@
 package com.portifolio.Raven.dto.token;
 
-public record TokenDto(String token) {
+import io.swagger.v3.oas.annotations.media.Schema;
+
+public record TokenDto(
+
+
+        @Schema(
+                description = "JWT access token",
+                example = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        )
+        String token
+
+) {
 }
