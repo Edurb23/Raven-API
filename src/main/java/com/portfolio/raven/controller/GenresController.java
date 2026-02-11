@@ -1,10 +1,10 @@
 package com.portfolio.raven.controller;
 
 import com.portfolio.raven.config.docs.ApiErrorResponse;
-import com.portfolio.raven.dto.generoDto.GeneroDetail;
 import com.portfolio.raven.dto.generoDto.GeneroList;
+import com.portfolio.raven.dto.generoDto.GenreDetail;
 import com.portfolio.raven.dto.generoDto.RegisterGenero;
-import com.portfolio.raven.service.GeneroService;
+import com.portfolio.raven.service.GenresService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,12 +28,12 @@ import java.util.UUID;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-@RequestMapping("genero")
+@RequestMapping("genre")
 @Tag(name = "Genres", description = "Endpoints for managing genres")
-public class GeneroController {
+public class GenresController {
 
     @Autowired
-    private GeneroService generoService;
+    private GenresService genresService;
 
     @GetMapping("/list")
     @Operation(
@@ -66,8 +66,8 @@ public class GeneroController {
             @Parameter(description = "Page number (starts at 0)", example = "0")
             Pageable pageable
     ){
-        var ListGenero = generoService.listAll(pageable).stream().toList();
-        return ok(ListGenero);
+        var ListGenres = genresService.listAll(pageable).stream().toList();
+        return ok(ListGenres);
     }
 
     @GetMapping("{id}")
@@ -90,12 +90,12 @@ public class GeneroController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiErrorResponse.class)))
     })
-    public ResponseEntity<GeneroDetail> getByID(
+    public ResponseEntity<GenreDetail> getByID(
             @Parameter(description = "Genre UUID", example = "3fa85f64-5717-4562-b3fc-2c963f66afa6", required = true)
             @PathVariable("id") UUID id
     ) {
-        var generoDetail = generoService.getById(id);
-        return ok(generoDetail);
+        var genreDetail = genresService.getById(id);
+        return ok(genreDetail);
     }
 
     @PostMapping("/register")
@@ -119,12 +119,12 @@ public class GeneroController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiErrorResponse.class)))
     })
-    public ResponseEntity<GeneroDetail> post(
+    public ResponseEntity<GenreDetail> post(
             @RequestBody @Valid RegisterGenero dto,
             UriComponentsBuilder uriComponentsBuilder
     ){
-        var generoDetail = generoService.register(dto);
-        var uri = uriComponentsBuilder.path("/genero/{id}").buildAndExpand(generoDetail.id()).toUri();
-        return ResponseEntity.created(uri).body(generoDetail);
+        var genreDetail = genresService.register(dto);
+        var uri = uriComponentsBuilder.path("/genero/{id}").buildAndExpand(genreDetail.id()).toUri();
+        return ResponseEntity.created(uri).body(genreDetail);
     }
 }

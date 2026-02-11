@@ -28,7 +28,7 @@ public class Artist {
     private UUID id;
 
     @Column(name = "name", nullable = false)
-    private String nomeArtist;
+    private String name;
 
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
@@ -37,11 +37,11 @@ public class Artist {
             joinColumns = @JoinColumn(name = "artist_id"),
             inverseJoinColumns = @JoinColumn(name = "genero_id")
     )
-    private Set<Genero> generos;
+    private Set<Genre> genres;
 
     @Lob
     @Column(name= "bio", nullable = false, columnDefinition = "MEDIUMTEXT")
-    private String biografia;
+    private String bio;
 
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
     private List<ArtistImage>artistImages;
@@ -66,10 +66,10 @@ public class Artist {
 
 
     public void updateArtist(UpdateArtistDto dto) {
-        if(dto.nomeArtist() != null)
-            nomeArtist = dto.nomeArtist();
-        if(dto.biografia() != null)
-            biografia = dto.biografia();
+        if(dto.name() != null)
+            name = dto.name();
+        if(dto.bio() != null)
+            bio = dto.bio();
 
     }
 }

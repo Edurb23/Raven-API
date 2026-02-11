@@ -5,9 +5,9 @@ import com.portfolio.raven.dto.artistDto.ArtistListDto;
 import com.portfolio.raven.dto.artistDto.RegisterArtistDto;
 import com.portfolio.raven.dto.artistDto.UpdateArtistDto;
 import com.portfolio.raven.entity.Artist;
-import com.portfolio.raven.entity.Genero;
+import com.portfolio.raven.entity.Genre;
 import com.portfolio.raven.repository.ArtistRepository;
-import com.portfolio.raven.repository.GeneroRepository;
+import com.portfolio.raven.repository.GenresRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class ArtistMapper {
 
      @Autowired
-     private GeneroRepository generoRepository;
+     private GenresRepository generoRepository;
 
      @Autowired
      private ArtistRepository artistRepository;
@@ -29,10 +29,10 @@ public class ArtistMapper {
     @Transactional
     public Artist toEntity(RegisterArtistDto dto) {
         Artist artist = new Artist();
-        artist.setNomeArtist(dto.nomeArtist());
-        artist.setBiografia(dto.biografia());
+        artist.setName(dto.name());
+        artist.setBio(dto.bio());
 
-        Set<Genero> generos = dto.generos().stream()
+        Set<Genre> generos = dto.generos().stream()
                 .map(id -> generoRepository.findById(id)
                         .orElseThrow(() -> new RuntimeException("Gênero não encontrado: " + id)))
                 .collect(Collectors.toSet());
@@ -44,32 +44,32 @@ public class ArtistMapper {
 
 
     public void update(UpdateArtistDto dto, Artist artist) {
-        if (dto.nomeArtist() != null && !dto.nomeArtist().isBlank()) {
-            artist.setNomeArtist(dto.nomeArtist());
+        if (dto.name() != null && !dto.name().isBlank()) {
+            artist.setName(dto.name());
         }
 
-        if (dto.biografia() != null && !dto.biografia().isBlank()) {
-            artist.setBiografia(dto.biografia());
+        if (dto.name() != null && !dto.bio().isBlank()) {
+            artist.setName(dto.bio());
         }
     }
 
 
     public ArtistDetail toDetailDto(Artist artist){
         Set<String> nomesGeneros = artist.getGeneros().stream()
-                .map(Genero::getNome)
+                .map(Genre::getNome)
                 .collect(Collectors.toSet());
 
-        return new ArtistDetail(artist.getId(),artist.getNomeArtist(), nomesGeneros,artist.getBiografia(),artist.getArtistImages(), artist.getCreated_at(), artist.getUpdate_at());
+        return new ArtistDetail(artist.getId(),artist.getName(), nomesGeneros,artist.getBio(),artist.getArtistImages(), artist.getCreated_at(), artist.getUpdate_at());
     }
 
 
 
     public ArtistListDto toList(Artist artist){
         Set<String> nomesGeneros = artist.getGeneros().stream()
-                .map(Genero::getNome)
+                .map(Genre::getNome)
                 .collect(Collectors.toSet());
 
-        return  new ArtistListDto(artist.getId(),artist.getNomeArtist(), nomesGeneros,artist.getBiografia(),artist.getArtistImages(),  artist.getCreated_at(), artist.getUpdate_at());
+        return  new ArtistListDto(artist.getId(),artist.getName(), nomesGeneros,artist.getBio(),artist.getArtistImages(),  artist.getCreated_at(), artist.getUpdate_at());
     }
 
 

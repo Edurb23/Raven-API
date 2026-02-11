@@ -9,7 +9,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface ArtistRepository extends JpaRepository<Artist, UUID> {
-    boolean existsByNomeArtistIgnoreCase(String nomeArtist);
+
+
+    boolean existsByNomeArtistIgnoreCase(String name);
 
     @Query("SELECT a FROM Artist a JOIN FETCH a.generos WHERE a.id = :id")
     Optional<Artist> findWithGeneros(@Param("id") UUID id);

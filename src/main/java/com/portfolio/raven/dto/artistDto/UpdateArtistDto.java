@@ -7,13 +7,13 @@ import java.util.UUID;
 public record UpdateArtistDto(
 
 
-        @Schema(description = "nomeArtists", example = "Artist or band name")
-        String nomeArtist,
+        @Schema(description = "name", example = "Artist or band name")
+        String name,
 
-        @Schema(description = "generos", example = "List of genre IDs")
-        Set<UUID> generos,
+        @Schema(description = "genres", example = "List of genre IDs")
+        Set<UUID> genres,
 
-        @Schema(description = "biografia", example = "Artist biography")
-        String biografia
+        @Schema(description = "bio", example = "Artist biography")
+        String bio
 ) {
 }

@@ -16,7 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Table(name = "TB_RAVEN_GENERO")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Genero {
+public class Genre {
 
     @EqualsAndHashCode.Include
     @Id
@@ -27,7 +27,7 @@ public class Genero {
     private UUID id;
 
     @Column(name = "nome",nullable = false)
-    private String nome;
+    private String name;
 
     @ManyToMany(mappedBy = "generos")
     @ToString.Exclude

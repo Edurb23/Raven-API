@@ -4,11 +4,11 @@ import com.portfolio.raven.dto.artistDto.ArtistDetail;
 import com.portfolio.raven.dto.artistDto.ArtistListDto;
 import com.portfolio.raven.dto.artistDto.RegisterArtistDto;
 import com.portfolio.raven.dto.artistDto.UpdateArtistDto;
-import com.portfolio.raven.entity.Genero;
+import com.portfolio.raven.entity.Genre;
 import com.portfolio.raven.mappers.ArtistMapper;
 import com.portfolio.raven.entity.Artist;
 import com.portfolio.raven.repository.ArtistRepository;
-import com.portfolio.raven.repository.GeneroRepository;
+import com.portfolio.raven.repository.GenresRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class ArtistService {
     private ArtistMapper artistMapper;
 
     @Autowired
-    private GeneroRepository generoRepository;
+    private GenresRepository generoRepository;
 
 
     public List<ArtistListDto> listAll(Pageable pageable){
@@ -53,10 +53,10 @@ public class ArtistService {
 
     @Transactional
     public ArtistDetail register(RegisterArtistDto dto){
-        boolean exists = artistRepository.existsByNomeArtistIgnoreCase(dto.nomeArtist());
+        boolean exists = artistRepository.existsByNomeArtistIgnoreCase(dto.name());
 
         if (exists) {
-            throw new RuntimeException("Já existe um artista cadastrado com o nome: " + dto.nomeArtist());
+            throw new RuntimeException("Já existe um artista cadastrado com o nome: " + dto.name());
         }
 
         Artist artist = artistMapper.toEntity(dto);
@@ -72,12 +72,12 @@ public class ArtistService {
 
         artistMapper.update(dto, artist);
 
-        if (dto.generos() != null) {
-            Set<Genero> generos = dto.generos().stream()
+        if (dto.genres() != null) {
+            Set<Genre> genres = dto.genres().stream()
                     .map(gid -> generoRepository.findById(gid)
                             .orElseThrow(() -> new RuntimeException("Gênero não encontrado: " + gid)))
                     .collect(Collectors.toSet());
-            artist.setGeneros(generos);
+            artist.setGenres(genres);
         }
 
         return artist;
