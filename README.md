@@ -37,7 +37,7 @@ The project also includes Swagger (OpenAPI) documentation, providing a clear and
 
 # 🔧 Build & Run
 
-## EN — How to Run the Project
+# How to Run the Project
 
 ### 📋 Requirements
 
