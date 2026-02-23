@@ -39,57 +39,92 @@ The project also includes Swagger (OpenAPI) documentation, providing a clear and
 
 ### 📋 Requirements
 
-Make sure you have installed:
+## EN — How to Run the Project
 
-- **Java 17 (LTS recommended)**
+### 📋 Requirements
+
+- **Java 17** (see `pom.xml` → `<java.version>17</java.version>`)
 - **Maven 3.9+**
 - **Docker & Docker Compose**
 - **MySQL 8.x**
 
+Project base:
+- **Spring Boot 3.5.0** (`pom.xml` parent)
+
 ---
 
-### 🛠 Environment Configuration
+### 🛠 Configuration (`application.properties`)
 
-Configure your `application.properties`:
+This project uses **`src/main/resources/application.properties`**.
 
-```yaml
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/raven_db
-    username: root
-    password: root
-  jpa:
-    hibernate:
-      ddl-auto: validate
+You must configure **Spotify credentials** + **Database credentials**.
+
+```properties
+spring.application.name=Raven
+
+# =========================
+# SPOTIFY API CONFIG
+# =========================
+spotify.client-id=YOUR_SPOTIFY_CLIENT_ID
+spotify.client-secret=YOUR_SPOTIFY_CLIENT_SECRET
+spotify.token-url=
+spotify.base-url=
+
+# =========================
+# DATABASE (MySQL)
+# =========================
+spring.datasource.url=jdbc:mysql://localhost:3306/
+spring.datasource.username=root
+spring.datasource.password=root
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# =========================
+# LIQUIBASE
+# =========================
+spring.liquibase.enabled=true
+spring.liquibase.change-log=classpath:/db/changelog/master.yaml
 ```
 
-Make sure database credentials match your Docker configuration if using containers.
+---
+
+### 🔑 What are `spotify.client-id` and `spotify.client-secret`?
+
+They are credentials from a **Spotify Developer App**, used to generate an access token and call Spotify endpoints.
+
+How to get yours:
+
+1. Go to the **Spotify Developer Dashboard**
+2. Create an app
+3. Copy **Client ID** and **Client Secret**
+4. Paste them into your `application.properties` (locally only)
+
+✅ Tip: use environment variables or a `application-local.properties` ignored by Git to avoid leaking secrets.
 
 ---
 
 ### 🐳 Running with Docker (Recommended)
 
+`docker-compose.yml` is included in the repository.
+
+Run:
+
 ```bash
 docker-compose up --build
 ```
 
-This will:
-
-- Start the MySQL container
-- Build the Spring Boot application
-- Run Liquibase migrations automatically
+This will start MySQL + the application (depending on your compose setup).
 
 ---
 
 ### 💻 Running Locally (Without Docker)
 
-1️⃣ Create the database manually:
+1️⃣ Create the database:
 
 ```sql
 CREATE DATABASE raven_db;
 ```
 
-2️⃣ Build and run the project:
+2️⃣ Run the project:
 
 ```bash
 mvn clean install
@@ -98,17 +133,27 @@ mvn spring-boot:run
 
 ---
 
-### 📄 Swagger Documentation
+### 🧩 Liquibase Notes
 
-After starting the application, access:
+This project uses **Liquibase** to version database changes.
+
+When the app starts:
+- Liquibase applies migrations from `classpath:/db/changelog/master.yaml`
+- It may also include **seed/insert scripts** to populate initial data (ex: default genres)
+
+So the database can be created and filled automatically when running the application.
+
+---
+
+### 📄 Swagger (OpenAPI)
+
+After starting the app, open:
 
 ```
 http://localhost:8080/swagger-ui/index.html
 ```
 
 ---
-
-
 ---
 
 ##  BR — Versão em Português
@@ -164,8 +209,6 @@ O projeto usa **`src/main/resources/application.properties`**.
 
 Você precisa configurar **credenciais do Spotify** + **credenciais do banco**.
 
-Exemplo (NÃO coloque secrets reais no GitHub):
-
 ```properties
 spring.application.name=Raven
 
@@ -174,29 +217,16 @@ spring.application.name=Raven
 # =========================
 spotify.client-id=SEU_SPOTIFY_CLIENT_ID
 spotify.client-secret=SEU_SPOTIFY_CLIENT_SECRET
-spotify.token-url=https://accounts.spotify.com/api/token
-spotify.base-url=https://api.spotify.com/v1
-
-# =========================
-# LOGGING
-# =========================
-logging.level.org.springframework.web=DEBUG
-logging.level.com.raven.project.Raven.services=DEBUG
+spotify.token-url=SUA_URL_TOKEN
+spotify.base-url=SUA__URL
 
 # =========================
 # DATABASE (MySQL)
 # =========================
-spring.datasource.url=jdbc:mysql://localhost:3306/raven_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+spring.datasource.url=jdbc:mysql://localhost:3306/
 spring.datasource.username=root
 spring.datasource.password=root
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-
-# =========================
-# JPA / HIBERNATE
-# =========================
-spring.jpa.hibernate.ddl-auto=none
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
 
 # =========================
 # LIQUIBASE
