@@ -37,7 +37,7 @@ The project also includes Swagger (OpenAPI) documentation, providing a clear and
 
 # 🔧 Build & Run
 
-# How to Run the Project
+## How to Run the Project
 
 ### 📋 Requirements
 
@@ -146,7 +146,9 @@ O projeto também conta com documentação da API utilizando Swagger (OpenAPI), 
 
 #### 🚧 Versão 1.2 — Em andamento
 
-#Como Executar o Projeto
+# 🔧 Build & Run
+
+# Como Executar o Projeto
 
 ### 📋 Requisitos
 
