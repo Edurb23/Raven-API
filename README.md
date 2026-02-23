@@ -134,7 +134,7 @@ O projeto também conta com documentação da API utilizando Swagger (OpenAPI), 
 - Sincronizar dados reais usando a API do Spotify  
 - Manter um banco estruturado e versionado
 - Disponibilizar documentação clara da API com Swagger
-- Servir como base para futuras funcionalidades como álbuns, playlists e um sistema musical completo  
+- Servir como base para futuras funcionalidades como álbuns, playlists e um sistema musical completo
 
 ### 📌 Versões
 
@@ -145,6 +145,77 @@ O projeto também conta com documentação da API utilizando Swagger (OpenAPI), 
 - Documentação da API com Swagger 
 
 #### 🚧 Versão 1.2 — Em andamento
+
+#Como Executar o Projeto
+
+### 📋 Requisitos
+
+Certifique-se de ter instalado:
+
+- **Java 17 (LTS recomendado)**
+- **Maven 3.9+**
+- **Docker & Docker Compose**
+- **MySQL 8.x**
+
+---
+
+### 🛠 Configuração
+
+Configure o `application.yml`:
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/raven_db
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: validate
+```
+
+---
+
+### 🐳 Executando com Docker (Recomendado)
+
+```bash
+docker-compose up --build
+```
+
+O Docker irá:
+
+- Subir o container do MySQL
+- Construir a aplicação Spring Boot
+- Executar as migrations do Liquibase automaticamente
+
+---
+
+### 💻 Executando Localmente
+
+1️⃣ Criar banco manualmente:
+
+```sql
+CREATE DATABASE raven_db;
+```
+
+2️⃣ Rodar aplicação:
+
+```bash
+mvn clean install
+mvn spring-boot:run
+```
+
+---
+
+### 📄 Acessando o Swagger
+
+Após iniciar a aplicação:
+
+```
+http://localhost:8080/swagger-ui/index.html
+```
+
+
 
 
 
