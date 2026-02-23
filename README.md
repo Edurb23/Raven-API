@@ -37,8 +37,6 @@ The project also includes Swagger (OpenAPI) documentation, providing a clear and
 
 # 🔧 Build & Run
 
-## How to Run the Project
-
 ### 📋 Requirements
 
 Make sure you have installed:
@@ -145,8 +143,6 @@ O projeto também conta com documentação da API utilizando Swagger (OpenAPI), 
 - Documentação da API com Swagger 
 
 #### 🚧 Versão 1.2 — Em andamento
-
-# 🔧 Build & Run
 
 # Como Executar o Projeto
 
