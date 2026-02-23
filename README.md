@@ -34,6 +34,83 @@ The project also includes Swagger (OpenAPI) documentation, providing a clear and
 
 #### 🚧 Version 1.2 — In Progress
 
+
+# 🔧 Build & Run
+
+## EN — How to Run the Project
+
+### 📋 Requirements
+
+Make sure you have installed:
+
+- **Java 17 (LTS recommended)**
+- **Maven 3.9+**
+- **Docker & Docker Compose**
+- **MySQL 8.x**
+
+---
+
+### 🛠 Environment Configuration
+
+Configure your `application.yml`:
+
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/raven_db
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: validate
+```
+
+Make sure database credentials match your Docker configuration if using containers.
+
+---
+
+### 🐳 Running with Docker (Recommended)
+
+```bash
+docker-compose up --build
+```
+
+This will:
+
+- Start the MySQL container
+- Build the Spring Boot application
+- Run Liquibase migrations automatically
+
+---
+
+### 💻 Running Locally (Without Docker)
+
+1️⃣ Create the database manually:
+
+```sql
+CREATE DATABASE raven_db;
+```
+
+2️⃣ Build and run the project:
+
+```bash
+mvn clean install
+mvn spring-boot:run
+```
+
+---
+
+### 📄 Swagger Documentation
+
+After starting the application, access:
+
+```
+http://localhost:8080/swagger-ui/index.html
+```
+
+---
+
+
 ---
 
 ##  BR — Versão em Português
