@@ -7,3 +7,7 @@ databaseChangeLog:
       file: db/changelog/003-insert-artist-generos.yaml
   - include:
       file: db/changelog/004-insert-roles.yaml
+  - include:
+      file: db/changelog/005-insert-user.yaml
+  - include:
+      file: db/changelog/006-insert-user-roles.yaml
