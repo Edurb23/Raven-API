@@ -57,18 +57,10 @@ Project base:
 
 This project uses **`src/main/resources/application.properties`**.
 
-You must configure **Spotify credentials** + **Database credentials**.
+You must configure **Database credentials**.
 
 ```properties
 spring.application.name=Raven
-
-# =========================
-# SPOTIFY API CONFIG
-# =========================
-spotify.client-id=YOUR_SPOTIFY_CLIENT_ID
-spotify.client-secret=YOUR_SPOTIFY_CLIENT_SECRET
-spotify.token-url=
-spotify.base-url=
 
 # =========================
 # DATABASE (MySQL)
@@ -207,18 +199,10 @@ Base do projeto:
 
 O projeto usa **`src/main/resources/application.properties`**.
 
-Você precisa configurar **credenciais do Spotify** + **credenciais do banco**.
+Você precisa configurar **credenciais do banco**.
 
 ```properties
 spring.application.name=Raven
-
-# =========================
-# SPOTIFY API CONFIG
-# =========================
-spotify.client-id=SEU_SPOTIFY_CLIENT_ID
-spotify.client-secret=SEU_SPOTIFY_CLIENT_SECRET
-spotify.token-url=SUA_URL_TOKEN
-spotify.base-url=SUA__URL
 
 # =========================
 # DATABASE (MySQL)
@@ -236,17 +220,6 @@ spring.liquibase.change-log=classpath:/db/changelog/master.yaml
 ```
 
 ---
-
-### 🔑 O que é `spotify.client-id` e `spotify.client-secret`?
-
-São as credenciais do seu **App no Spotify Developer**, usadas para gerar o token de acesso e consumir os endpoints da API.
-
-Como pegar as suas:
-
-1. Acesse o **Spotify Developer Dashboard**
-2. Crie um app
-3. Copie **Client ID** e **Client Secret**
-4. Cole no seu `application.properties` (somente local)
 
 ✅ Dica: use variáveis de ambiente ou um `application-local.properties` (ignorado pelo Git) para não vazar credenciais.
 
