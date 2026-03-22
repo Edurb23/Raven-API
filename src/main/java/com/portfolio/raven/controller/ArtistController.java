@@ -8,6 +8,7 @@ import com.portfolio.raven.service.ArtistService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import io.swagger.v3.oas.annotations.Parameter;
@@ -20,6 +21,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -69,6 +71,7 @@ public class ArtistController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiErrorResponse.class)))
     })
+    @SecurityRequirement(name = "bearerAuth")
     public ResponseEntity<List<ArtistListDto>> getAll(
             @Parameter(description = "Page number (starts at 0)", example = "0")
             Pageable pageable
@@ -105,6 +108,7 @@ public class ArtistController {
         System.out.println(detail.genres());
         return ResponseEntity.ok(detail);
     }
+
 
     @PostMapping("/register")
     @Transactional

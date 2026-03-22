@@ -1,0 +1,79 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-test-users
+      author: edu
+      changes:
+        - insert:
+            tableName: tb_raven_users
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "UUID()"
+              - column:
+                  name: username
+                  value: RubyJen
+              - column:
+                  name: email
+                  value: rubyjen@raven.com
+              - column:
+                  name: password
+                  value: $2a$10$7EqJtq98hPqEX7fNZaFWoOHi6M6Q6Q0mK8GugHgd6Nq35p3xNmPRW
+              - column:
+                  name: status
+                  valueBoolean: true
+              - column:
+                  name: created_at
+                  valueComputed: "NOW()"
+              - column:
+                  name: update_at
+                  valueComputed: "NOW()"
+
+        - insert:
+            tableName: tb_raven_users
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "UUID()"
+              - column:
+                  name: username
+                  value: KingVamp
+              - column:
+                  name: email
+                  value: kingvamp@raven.com
+              - column:
+                  name: password
+                  value: $2a$10$7EqJtq98hPqEX7fNZaFWoOHi6M6Q6Q0mK8GugHgd6Nq35p3xNmPRW
+              - column:
+                  name: status
+                  valueBoolean: true
+              - column:
+                  name: created_at
+                  valueComputed: "NOW()"
+              - column:
+                  name: update_at
+                  valueComputed: "NOW()"
+
+        - insert:
+            tableName: tb_raven_users
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "UUID()"
+              - column:
+                  name: username
+                  value: Pitica
+              - column:
+                  name: email
+                  value: pitica@raven.com
+              - column:
+                  name: password
+                  value: $2a$10$7EqJtq98hPqEX7fNZaFWoOHi6M6Q6Q0mK8GugHgd6Nq35p3xNmPRW
+              - column:
+                  name: status
+                  valueBoolean: true
+              - column:
+                  name: created_at
+                  valueComputed: "NOW()"
+              - column:
+                  name: update_at
+                  valueComputed: "NOW()"

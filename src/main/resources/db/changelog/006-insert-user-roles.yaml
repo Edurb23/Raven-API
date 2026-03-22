@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-user-roles
+      author: edu
+      changes:
+        - insert:
+            tableName: tb_raven_user_roles
+            columns:
+              - column:
+                  name: user_id
+                  value: f87db553-25eb-11f1-a027-f68a81d66cd4
+              - column:
+                  name: role_id
+                  valueComputed: "(SELECT id FROM tb_raven_role WHERE roles = 'ROLE_USER')"
+
+        - insert:
+            tableName: tb_raven_user_roles
+            columns:
+              - column:
+                  name: user_id
+                  value: f87e438d-25eb-11f1-a027-f68a81d66cd4
+              - column:
+                  name: role_id
+                  valueComputed: "(SELECT id FROM tb_raven_role WHERE roles = 'ROLE_USER')"
+
+        - insert:
+            tableName: tb_raven_user_roles
+            columns:
+              - column:
+                  name: user_id
+                  value: f87eae3b-25eb-11f1-a027-f68a81d66cd4
+              - column:
+                  name: role_id
+                  valueComputed: "(SELECT id FROM tb_raven_role WHERE roles = 'ROLE_USER')"

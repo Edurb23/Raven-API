@@ -1,10 +1,12 @@
 package com.portfolio.raven.service;
 
 import com.portfolio.raven.dto.userDto.*;
+import com.portfolio.raven.entity.Role;
 import com.portfolio.raven.entity.User;
 import com.portfolio.raven.exceptions.EmailAlreadyExistsException;
 import com.portfolio.raven.exceptions.UsernameAlreadyExistExceotion;
 import com.portfolio.raven.mappers.UserMapper;
+import com.portfolio.raven.repository.RoleRepository;
 import com.portfolio.raven.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -21,6 +24,10 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+
+    @Autowired
+    private RoleRepository roleRepository;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -28,16 +35,43 @@ public class UserService {
     private UserMapper userMapper;
 
     @Transactional
-    public UserDetail create(RegisterUserDto dto){
-        if(userRepository.existsByEmail(dto.email())){
+    public UserDetail create(RegisterUserDto dto) {
+        if (userRepository.existsByEmail(dto.email())) {
             throw new EmailAlreadyExistsException("Email is already registered.");
         }
-        if(userRepository.existsByUsername(dto.username())){
+
+        if (userRepository.existsByUsername(dto.username())) {
             throw new UsernameAlreadyExistExceotion("Username is already in use.");
         }
-        String password  = passwordEncoder.encode(dto.password());
+
+        String password = passwordEncoder.encode(dto.password());
         User user = userMapper.toEntity(dto, password);
+
+        Role defaultRole = roleRepository.findByName("ROLE_USER");
+        if (defaultRole == null) {
+            throw new RuntimeException("Default role not found.");
+        }
+
+        user.setRoles(Set.of(defaultRole));
         userRepository.save(user);
+
+        return userMapper.userDetail(user);
+    }
+
+
+    @Transactional
+    public UserDetail assignRole(UUID userId, String roleName) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found."));
+
+        Role role = roleRepository.findByName(roleName);
+        if (role == null) {
+            throw new RuntimeException("Role not found.");
+        }
+
+        user.getRoles().add(role);
+        userRepository.save(user);
+
         return userMapper.userDetail(user);
     }
 
