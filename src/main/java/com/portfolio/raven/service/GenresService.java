@@ -32,15 +32,15 @@ public class GenresService {
 
     public GenreDetail getById(UUID id){
         var genres = genresRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Genero não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Genre not found."));
         return genresMapper.toDetailDto(genres);
     }
 
     public GenreDetail register(RegisterGenero dto){
-        boolean exists = genresRepository.existsByNomeIgnoreCase(dto.nome());
+        boolean exists = genresRepository.existsByNameIgnoreCase(dto.name());
 
         if(exists){
-            throw new RuntimeException("Já existe um genero cadastrado com o nome: " + dto.nome());
+            throw new RuntimeException("A genre with this name already exists. " + dto.name());
         }
 
         Genre genres = genresMapper.toEntity(dto);

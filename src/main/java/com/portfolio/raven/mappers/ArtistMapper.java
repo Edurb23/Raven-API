@@ -32,12 +32,12 @@ public class ArtistMapper {
         artist.setName(dto.name());
         artist.setBio(dto.bio());
 
-        Set<Genre> generos = dto.generos().stream()
+        Set<Genre> genre = dto.genres().stream()
                 .map(id -> generoRepository.findById(id)
                         .orElseThrow(() -> new RuntimeException("Gênero não encontrado: " + id)))
                 .collect(Collectors.toSet());
 
-        artist.setGeneros(generos);
+        artist.setGenres(genre);
 
         return artist;
     }
@@ -55,21 +55,21 @@ public class ArtistMapper {
 
 
     public ArtistDetail toDetailDto(Artist artist){
-        Set<String> nomesGeneros = artist.getGeneros().stream()
-                .map(Genre::getNome)
+        Set<String> genreNames = artist.getGenres().stream()
+                .map(Genre::getName)
                 .collect(Collectors.toSet());
 
-        return new ArtistDetail(artist.getId(),artist.getName(), nomesGeneros,artist.getBio(),artist.getArtistImages(), artist.getCreated_at(), artist.getUpdate_at());
+        return new ArtistDetail(artist.getId(),artist.getName(), genreNames,artist.getBio(),artist.getArtistImages(), artist.getCreated_at(), artist.getUpdate_at());
     }
 
 
 
     public ArtistListDto toList(Artist artist){
-        Set<String> nomesGeneros = artist.getGeneros().stream()
-                .map(Genre::getNome)
+        Set<String> genreNames = artist.getGenres().stream()
+                .map(Genre::getName)
                 .collect(Collectors.toSet());
 
-        return  new ArtistListDto(artist.getId(),artist.getName(), nomesGeneros,artist.getBio(),artist.getArtistImages(),  artist.getCreated_at(), artist.getUpdate_at());
+        return  new ArtistListDto(artist.getId(),artist.getName(), genreNames,artist.getBio(),artist.getArtistImages(),  artist.getCreated_at(), artist.getUpdate_at());
     }
 
 

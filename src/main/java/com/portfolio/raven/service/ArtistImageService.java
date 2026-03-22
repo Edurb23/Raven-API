@@ -23,7 +23,7 @@ public class ArtistImageService {
     public String saveImageAsBase64(MultipartFile file, UUID artistId){
         try {
             Artist artist = artistRepository.findById(artistId)
-                    .orElseThrow(() -> new RuntimeException("Artist não encontrado com ID: " + artistId));
+                    .orElseThrow(() -> new RuntimeException("Artist not found with ID: " + artistId));
 
 
             byte[] imageBytes = file.getBytes();
@@ -36,10 +36,10 @@ public class ArtistImageService {
 
             artistImageRepository.save(artistImage);
 
-            return "Imagem salva com sucesso para artista: " + artist.getNomeArtist();
+            return "Image successfully saved for artist:  " + artist.getName();
 
         } catch (IOException e) {
-            throw new RuntimeException("Erro ao converter imagem para base64: " + e.getMessage());
+            throw new RuntimeException("Error converting image to Base64:  " + e.getMessage());
         }
     }
 

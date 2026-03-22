@@ -1,7 +1,6 @@
 package com.portfolio.raven.service;
 
 import com.portfolio.raven.dto.userDto.*;
-import com.portifolio.Raven.dto.userDto.*;
 import com.portfolio.raven.entity.User;
 import com.portfolio.raven.exceptions.EmailAlreadyExistsException;
 import com.portfolio.raven.exceptions.UsernameAlreadyExistExceotion;
@@ -31,10 +30,10 @@ public class UserService {
     @Transactional
     public UserDetail create(RegisterUserDto dto){
         if(userRepository.existsByEmail(dto.email())){
-            throw new EmailAlreadyExistsException("Esse email já foi cadastrado.");
+            throw new EmailAlreadyExistsException("Email is already registered.");
         }
         if(userRepository.existsByUsername(dto.username())){
-            throw new UsernameAlreadyExistExceotion("Esse Username já esta sendo usado");
+            throw new UsernameAlreadyExistExceotion("Username is already in use.");
         }
         String password  = passwordEncoder.encode(dto.password());
         User user = userMapper.toEntity(dto, password);
@@ -51,14 +50,14 @@ public class UserService {
 
     public UserDetail getById(UUID id){
         var user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Genero não encontrado"));
+                .orElseThrow(() -> new RuntimeException("User not found."));
         return userMapper.userDetail(user);
     }
 
     @Transactional
     public UserDetail updateEmail(UUID id, UpdateEmailDto dto){
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+                .orElseThrow(() -> new RuntimeException("User not found."));
         if(!user.getEmail().equals(dto.email()) && userRepository.existsByEmail(dto.email())){
             throw new RuntimeException("Esse email já está em uso.");
         }
@@ -71,7 +70,7 @@ public class UserService {
     @Transactional
     public UserDetail updateUsername(UUID id, UpdateUsernameDto dto){
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+                .orElseThrow(() -> new RuntimeException("User not found."));
         if(!user.getUsername().equals(dto.Newusername()) && userRepository.existsByUsername(dto.Newusername())){
             throw new RuntimeException("Esse username já está em uso.");
         }
@@ -83,7 +82,7 @@ public class UserService {
     @Transactional
     public void deleteUser(UUID id){
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+                .orElseThrow(() -> new RuntimeException("User not found."));
         user.setStatus(false);
         userRepository.save(user);
     }

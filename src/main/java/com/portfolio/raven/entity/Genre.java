@@ -29,7 +29,7 @@ public class Genre {
     @Column(name = "nome",nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "generos")
+    @ManyToMany(mappedBy = "genres")
     @ToString.Exclude
     @JsonIgnore
     private Set<Artist> artists;

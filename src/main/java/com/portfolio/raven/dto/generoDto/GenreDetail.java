@@ -6,10 +6,10 @@ import com.portfolio.raven.entity.Genre;
 import java.util.Set;
 import java.util.UUID;
 
-public record GenreDetail(UUID id, String nome, Set<Artist> artists) {
+public record GenreDetail(UUID id, String name, Set<Artist> artists) {
 
             public GenreDetail(Genre genres){
-                this(genres.getId(),genres.getNome(),genres.getArtists());
+                this(genres.getId(),genres.getName(),genres.getArtists());
             }
 
 }

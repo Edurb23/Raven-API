@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 public record RegisterGenero(
         @NotBlank
         @Schema(description = "nome", example = "Name of a new genre")
-        String nome
+        String name
 
 ) {
 }

@@ -29,7 +29,7 @@ public class ArtistService {
     private ArtistMapper artistMapper;
 
     @Autowired
-    private GenresRepository generoRepository;
+    private GenresRepository genreRepository;
 
 
     public List<ArtistListDto> listAll(Pageable pageable){
@@ -40,8 +40,8 @@ public class ArtistService {
     }
 
     public ArtistDetail findById(UUID id) {
-        var artist = artistRepository.findWithGeneros(id)
-                .orElseThrow(() -> new RuntimeException("Artista não encontrado"));
+        var artist = artistRepository.findWithGenres(id)
+                .orElseThrow(() -> new RuntimeException("Artist or band not found."));
         return artistMapper.toDetailDto(artist);
     }
 
@@ -53,10 +53,10 @@ public class ArtistService {
 
     @Transactional
     public ArtistDetail register(RegisterArtistDto dto){
-        boolean exists = artistRepository.existsByNomeArtistIgnoreCase(dto.name());
+        boolean exists = artistRepository.existsByNameIgnoreCase(dto.name());
 
         if (exists) {
-            throw new RuntimeException("Já existe um artista cadastrado com o nome: " + dto.name());
+            throw new RuntimeException("An artist or band with this name already exists " + dto.name());
         }
 
         Artist artist = artistMapper.toEntity(dto);
@@ -68,14 +68,14 @@ public class ArtistService {
     @Transactional
     public Artist update(UUID id, UpdateArtistDto dto) {
         Artist artist = artistRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Artista não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Artist or band not found."));
 
         artistMapper.update(dto, artist);
 
         if (dto.genres() != null) {
             Set<Genre> genres = dto.genres().stream()
-                    .map(gid -> generoRepository.findById(gid)
-                            .orElseThrow(() -> new RuntimeException("Gênero não encontrado: " + gid)))
+                    .map(gid -> genreRepository.findById(gid)
+                            .orElseThrow(() -> new RuntimeException("Genre not found. " + gid)))
                     .collect(Collectors.toSet());
             artist.setGenres(genres);
         }

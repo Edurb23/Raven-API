@@ -23,8 +23,8 @@ public class AuthService {
                 authDto.password()
         );
         var authentication = authenticationManager.authenticate(authenticationToken);
-        var usuario = (User) authentication.getPrincipal();
-        var token = tokenService.generateToken(usuario);
+        var user = (User) authentication.getPrincipal();
+        var token = tokenService.generateToken(user);
         return new TokenDto(token);
     }
 

@@ -102,7 +102,7 @@ public class ArtistController {
             @PathVariable UUID id
     ) {
         ArtistDetail detail = artistService.findById(id);
-        System.out.println(detail.generos());
+        System.out.println(detail.genres());
         return ResponseEntity.ok(detail);
     }
 
