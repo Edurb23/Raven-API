@@ -26,7 +26,7 @@ public class Role {
     private UUID id;
 
     @Column(name = "roles", nullable = false)
-    private String roles;
+    private String  name;
 
     @Column(name = "description")
     private String descriptions;

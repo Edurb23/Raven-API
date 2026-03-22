@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-roles-1
+      author: edu
+      changes:
+        - insert:
+            tableName: tb_raven_role
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "UUID()"
+              - column:
+                  name: roles
+                  value: ROLE_USER
+              - column:
+                  name: description
+                  value: Default user role
+
+        - insert:
+            tableName: tb_raven_role
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "UUID()"
+              - column:
+                  name: roles
+                  value: ROLE_ADMIN
+              - column:
+                  name: description
+                  value: Administrator role
