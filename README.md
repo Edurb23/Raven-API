@@ -32,7 +32,18 @@ The project also includes Swagger (OpenAPI) documentation, providing a clear and
 - Database structured with Liquibase
 - Swagger API documentation available 
 
-#### 🚧 Version 1.2 — In Progress
+#### ✅ Version 1.2 — Completed
+- Album and music domain created
+- Album and music database migrations added with Liquibase
+- User album lists added
+- Album reviews with rating and comments added
+- Liked albums and favorite artists support added
+- Main artist image and album cover selection added
+- Unit tests added for ArtistController
+- Unit tests added for artist image and album cover selection
+- Security and role guard improvements
+
+#### 🚧 Version 1.3 — In Progress
 
 
 # 🔧 Build & Run
@@ -179,7 +190,18 @@ O projeto também conta com documentação da API utilizando Swagger (OpenAPI), 
 - Banco estruturado com Liquibase
 - Documentação da API com Swagger 
 
-#### 🚧 Versão 1.2 — Em andamento
+#### ✅ Versão 1.2 — Completa
+- Domínio de álbuns e músicas criado
+- Migrations de álbuns e músicas adicionadas com Liquibase
+- Listas de álbuns do usuário adicionadas
+- Reviews de álbuns com nota e comentário adicionadas
+- Suporte a álbuns curtidos e artistas favoritos adicionado
+- Seleção de imagem principal do artista e capa principal do álbum adicionada
+- Testes unitários adicionados para ArtistController
+- Testes unitários adicionados para seleção de imagem de artista e capa de álbum
+- Melhorias na segurança e nas regras de roles
+
+#### 🚧 Versão 1.3 — Em andamento
 
 # Como Executar o Projeto
 
