@@ -1,0 +1,349 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-create-album-music
+      author: edu
+      changes:
+        - createTable:
+            tableName: tb_raven_albums
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: cover_url
+                  type: varchar(500)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: artist_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: duration_seconds
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: release_year
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_at
+                  type: timestamp
+
+        - createTable:
+            tableName: tb_raven_music
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: artist_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: album_id
+                  type: varchar(36)
+              - column:
+                  name: duration_seconds
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: single_track
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: track_number
+                  type: int
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_at
+                  type: timestamp
+
+        - addForeignKeyConstraint:
+            baseTableName: tb_raven_albums
+            baseColumnNames: artist_id
+            constraintName: fk_raven_albums_artist
+            referencedTableName: tb_raven_artists
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: tb_raven_music
+            baseColumnNames: artist_id
+            constraintName: fk_raven_music_artist
+            referencedTableName: tb_raven_artists
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: tb_raven_music
+            baseColumnNames: album_id
+            constraintName: fk_raven_music_album
+            referencedTableName: tb_raven_albums
+            referencedColumnNames: id
+
+  - changeSet:
+      id: 004-create-user-library
+      author: edu
+      changes:
+        - createTable:
+            tableName: tb_raven_album_reviews
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: album_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rating
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: comment
+                  type: text
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_at
+                  type: timestamp
+
+        - sql:
+            sql: ALTER TABLE tb_raven_album_reviews ADD CONSTRAINT ck_raven_album_reviews_rating CHECK (rating >= 0 AND rating <= 5)
+
+        - addUniqueConstraint:
+            tableName: tb_raven_album_reviews
+            columnNames: user_id, album_id
+            constraintName: uk_raven_album_reviews_user_album
+
+        - createTable:
+            tableName: tb_raven_album_likes
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: album_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+
+        - addUniqueConstraint:
+            tableName: tb_raven_album_likes
+            columnNames: user_id, album_id
+            constraintName: uk_raven_album_likes_user_album
+
+        - createTable:
+            tableName: tb_raven_user_album_lists
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(500)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_at
+                  type: timestamp
+
+        - createTable:
+            tableName: tb_raven_user_album_list_items
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: list_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: album_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+
+        - addUniqueConstraint:
+            tableName: tb_raven_user_album_list_items
+            columnNames: list_id, album_id
+            constraintName: uk_raven_album_list_items_list_album
+
+        - createTable:
+            tableName: tb_raven_favorite_artists
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: artist_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+
+        - addUniqueConstraint:
+            tableName: tb_raven_favorite_artists
+            columnNames: user_id, artist_id
+            constraintName: uk_raven_favorite_artists_user_artist
+
+        - addForeignKeyConstraint:
+            baseTableName: tb_raven_album_reviews
+            baseColumnNames: user_id
+            constraintName: fk_raven_album_reviews_user
+            referencedTableName: tb_raven_users
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: tb_raven_album_reviews
+            baseColumnNames: album_id
+            constraintName: fk_raven_album_reviews_album
+            referencedTableName: tb_raven_albums
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: tb_raven_album_likes
+            baseColumnNames: user_id
+            constraintName: fk_raven_album_likes_user
+            referencedTableName: tb_raven_users
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: tb_raven_album_likes
+            baseColumnNames: album_id
+            constraintName: fk_raven_album_likes_album
+            referencedTableName: tb_raven_albums
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: tb_raven_user_album_lists
+            baseColumnNames: user_id
+            constraintName: fk_raven_user_album_lists_user
+            referencedTableName: tb_raven_users
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: tb_raven_user_album_list_items
+            baseColumnNames: list_id
+            constraintName: fk_raven_album_list_items_list
+            referencedTableName: tb_raven_user_album_lists
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: tb_raven_user_album_list_items
+            baseColumnNames: album_id
+            constraintName: fk_raven_album_list_items_album
+            referencedTableName: tb_raven_albums
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: tb_raven_favorite_artists
+            baseColumnNames: user_id
+            constraintName: fk_raven_favorite_artists_user
+            referencedTableName: tb_raven_users
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: tb_raven_favorite_artists
+            baseColumnNames: artist_id
+            constraintName: fk_raven_favorite_artists_artist
+            referencedTableName: tb_raven_artists
+            referencedColumnNames: id

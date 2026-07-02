@@ -1,0 +1,20 @@
+package com.portifolio.Raven.dto.albumDto;
+
+import com.portifolio.Raven.entity.AlbumType;
+
+import java.time.Instant;
+import java.util.UUID;
+
+public record AlbumDetail(
+        UUID id,
+        String coverUrl,
+        String name,
+        UUID artistId,
+        String artistName,
+        Integer durationSeconds,
+        AlbumType type,
+        Integer releaseYear,
+        Instant created_at,
+        Instant update_at
+) {
+}
