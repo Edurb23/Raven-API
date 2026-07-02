@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: 007-add-selected-artist-image
+      author: edu
+      changes:
+        - addColumn:
+            tableName: tb_raven_artist_image
+            columns:
+              - column:
+                  name: selected
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 007-create-album-covers
+      author: edu
+      changes:
+        - createTable:
+            tableName: tb_raven_album_covers
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: url
+                  type: longtext
+                  constraints:
+                    nullable: false
+              - column:
+                  name: selected
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: album_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_at
+                  type: timestamp
+
+        - addForeignKeyConstraint:
+            baseTableName: tb_raven_album_covers
+            baseColumnNames: album_id
+            constraintName: fk_raven_album_covers_album
+            referencedTableName: tb_raven_albums
+            referencedColumnNames: id
