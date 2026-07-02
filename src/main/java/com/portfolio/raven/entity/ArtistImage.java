@@ -30,6 +30,9 @@ public class ArtistImage {
     @Column(name = "url", nullable = false )
     private String urlImage;
 
+    @Column(name = "selected", nullable = false)
+    private Boolean selected = false;
+
     @ManyToOne
     @JoinColumn(name = "artist_id", nullable = false)
     @JsonIgnore
@@ -46,6 +49,9 @@ public class ArtistImage {
         Instant now = Instant.now();
         created_at = now;
         update_at = now;
+        if (selected == null) {
+            selected = false;
+        }
     }
 
     @PreUpdate

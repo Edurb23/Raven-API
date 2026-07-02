@@ -247,4 +247,16 @@ public class ArtistController {
             return ResponseEntity.status(500).body("Erro ao salvar a imagem: " + e.getMessage());
         }
     }
+
+    @PutMapping("/{artistId}/images/{imageId}/select")
+    @Operation(
+            summary = "Select artist main image",
+            description = "Selects which artist image should be used as the main image."
+    )
+    public ResponseEntity<String> selectImage(
+            @PathVariable UUID artistId,
+            @PathVariable UUID imageId
+    ) {
+        return ResponseEntity.ok(artistImageService.selectArtistImage(artistId, imageId));
+    }
 }

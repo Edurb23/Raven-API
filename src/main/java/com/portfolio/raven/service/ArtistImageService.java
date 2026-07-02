@@ -33,6 +33,7 @@ public class ArtistImageService {
             ArtistImage artistImage = new ArtistImage();
             artistImage.setArtist(artist);
             artistImage.setUrlImage(base64Image);
+            artistImage.setSelected(artistImageRepository.findByArtistIdAndSelectedTrue(artistId).isEmpty());
 
             artistImageRepository.save(artistImage);
 
@@ -41,6 +42,23 @@ public class ArtistImageService {
         } catch (IOException e) {
             throw new RuntimeException("Error converting image to Base64:  " + e.getMessage());
         }
+    }
+
+    public String selectArtistImage(UUID artistId, UUID imageId) {
+        ArtistImage selectedImage = artistImageRepository.findById(imageId)
+                .orElseThrow(() -> new RuntimeException("Artist image not found with ID: " + imageId));
+
+        if (!selectedImage.getArtist().getId().equals(artistId)) {
+            throw new RuntimeException("Image does not belong to artist: " + artistId);
+        }
+
+        artistImageRepository.findByArtistId(artistId)
+                .forEach(image -> {
+                    image.setSelected(image.getId().equals(imageId));
+                    artistImageRepository.save(image);
+                });
+
+        return "Selected image updated for artist: " + selectedImage.getArtist().getName();
     }
 
 

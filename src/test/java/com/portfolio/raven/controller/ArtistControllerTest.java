@@ -228,6 +228,21 @@ class ArtistControllerTest {
         verify(artistImageService).saveImageAsBase64(file, artistId);
     }
 
+    @Test
+    void shouldSelectArtistImage() throws Exception {
+        UUID artistId = UUID.randomUUID();
+        UUID imageId = UUID.randomUUID();
+
+        when(artistImageService.selectArtistImage(artistId, imageId))
+                .thenReturn("Selected image updated for artist: Radiohead");
+
+        mockMvc.perform(put("/artist/{artistId}/images/{imageId}/select", artistId, imageId))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Selected image updated for artist: Radiohead"));
+
+        verify(artistImageService).selectArtistImage(artistId, imageId);
+    }
+
     private Artist artist(UUID artistId, String name, String bio, String genreName) {
         Genre genre = new Genre();
         genre.setId(UUID.randomUUID());

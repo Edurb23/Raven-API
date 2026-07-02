@@ -13,3 +13,5 @@ databaseChangeLog:
       file: db/changelog/005-insert-user.yaml
   - include:
       file: db/changelog/006-insert-user-roles.yaml
+  - include:
+      file: db/changelog/007-selectable-artist-album-images.yaml
