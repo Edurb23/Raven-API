@@ -90,21 +90,6 @@ spring.liquibase.change-log=classpath:/db/changelog/master.yaml
 
 ---
 
-### 🔑 What are `spotify.client-id` and `spotify.client-secret`?
-
-They are credentials from a **Spotify Developer App**, used to generate an access token and call Spotify endpoints.
-
-How to get yours:
-
-1. Go to the **Spotify Developer Dashboard**
-2. Create an app
-3. Copy **Client ID** and **Client Secret**
-4. Paste them into your `application.properties` (locally only)
-
-✅ Tip: use environment variables or a `application-local.properties` ignored by Git to avoid leaking secrets.
-
----
-
 ### 🐳 Running with Docker (Recommended)
 
 `docker-compose.yml` is included in the repository.
