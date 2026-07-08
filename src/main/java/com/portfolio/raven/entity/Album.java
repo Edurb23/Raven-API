@@ -51,6 +51,10 @@ public class Album {
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
     private List<AlbumCover> covers;
 
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Music> tracks;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant created_at;
 
