@@ -59,7 +59,7 @@ public class MusicMapper {
                 music.getId(),
                 music.getName(),
                 music.getArtist().getId(),
-                music.getArtist().getNomeArtist(),
+                music.getArtist().getName(),
                 album != null ? album.getId() : null,
                 album != null ? album.getName() : null,
                 music.getDurationSeconds(),

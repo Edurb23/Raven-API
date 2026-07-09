@@ -105,7 +105,7 @@ public class UserService {
     public UserDetail updateUsername(UUID id, UpdateUsernameDto dto){
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found."));
-        if(!user.getUsername().equals(dto.Newusername()) && userRepository.existsByUsername(dto.Newusername())){
+        if(!user.getDisplayUsername().equals(dto.Newusername()) && userRepository.existsByUsername(dto.Newusername())){
             throw new RuntimeException("Esse username já está em uso.");
         }
         user.setUsername(dto.Newusername());

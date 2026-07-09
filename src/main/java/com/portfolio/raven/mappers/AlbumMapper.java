@@ -54,7 +54,7 @@ public class AlbumMapper {
                 album.getCoverUrl(),
                 album.getName(),
                 album.getArtist().getId(),
-                album.getArtist().getNomeArtist(),
+                album.getArtist().getName(),
                 album.getDurationSeconds(),
                 album.getType(),
                 album.getReleaseYear(),

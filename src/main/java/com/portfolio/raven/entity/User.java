@@ -92,6 +92,10 @@ public class User  implements UserDetails {
         return email;
     }
 
+    public String getDisplayUsername() {
+        return username;
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
