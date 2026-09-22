@@ -20,9 +20,25 @@ public class ArtistImageService {
    private final ArtistImageRepository artistImageRepository;
 
 
+    @org.springframework.transaction.annotation.Transactional
     public String saveImageAsBase64(MultipartFile file, UUID artistId){
         try {
-            Artist artist = artistRepository.findById(artistId)
+            if (file == null || file.isEmpty() || file.getSize() > 5 * 1024 * 1024) {
+                throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "Choose an image up to 5 MB");
+            }
+            try (var input = javax.imageio.ImageIO.createImageInputStream(file.getInputStream())) {
+                var readers = javax.imageio.ImageIO.getImageReaders(input);
+                if (!readers.hasNext()) throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "Choose a JPEG, PNG or GIF image");
+                var reader = readers.next();
+                try {
+                    if (!java.util.Set.of("jpeg", "jpg", "png", "gif").contains(reader.getFormatName().toLowerCase(java.util.Locale.ROOT)))
+                        throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "Choose a JPEG, PNG or GIF image");
+                    reader.setInput(input);
+                    if ((long) reader.getWidth(0) * reader.getHeight(0) > 40_000_000L)
+                        throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "Image dimensions are too large");
+                } finally { reader.dispose(); }
+            }
+            Artist artist = artistRepository.findLockedById(artistId)
                     .orElseThrow(() -> new RuntimeException("Artist not found with ID: " + artistId));
 
 
@@ -44,7 +60,10 @@ public class ArtistImageService {
         }
     }
 
+    @org.springframework.transaction.annotation.Transactional
     public String selectArtistImage(UUID artistId, UUID imageId) {
+        artistRepository.findLockedById(artistId)
+                .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND, "Artist not found"));
         ArtistImage selectedImage = artistImageRepository.findById(imageId)
                 .orElseThrow(() -> new RuntimeException("Artist image not found with ID: " + imageId));
 

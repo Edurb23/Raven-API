@@ -159,7 +159,7 @@ class ArtistImageVotingServiceTest {
         @Bean DataSource dataSource() {
             var source = new DriverManagerDataSource("jdbc:h2:mem:imagevotes;MODE=MySQL;DB_CLOSE_DELAY=-1", "sa", "");
             var db = new JdbcTemplate(source);
-            db.execute("CREATE TABLE tb_raven_artists(id VARCHAR(36) PRIMARY KEY)");
+            db.execute("CREATE TABLE tb_raven_artists(id VARCHAR(36) PRIMARY KEY, blocked BOOLEAN DEFAULT FALSE NOT NULL)");
             db.execute("CREATE TABLE tb_raven_users(id VARCHAR(36) PRIMARY KEY)");
             db.execute("CREATE TABLE tb_raven_artist_image(id VARCHAR(36) PRIMARY KEY, artist_id VARCHAR(36), selected BOOLEAN, created_at TIMESTAMP, update_at TIMESTAMP)");
             return source;

@@ -98,6 +98,7 @@ public class UserService {
 
     @Transactional
     public UserDetail updateEmail(UUID id, UpdateEmailDto dto){
+        requireOwnerOrAdmin(id);
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found."));
         if(!user.getEmail().equals(dto.email()) && userRepository.existsByEmail(dto.email())){
@@ -111,6 +112,7 @@ public class UserService {
 
     @Transactional
     public UserDetail updateUsername(UUID id, UpdateUsernameDto dto){
+        requireOwnerOrAdmin(id);
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found."));
         if(!user.getDisplayUsername().equals(dto.Newusername()) && userRepository.existsByUsername(dto.Newusername())){
@@ -123,10 +125,19 @@ public class UserService {
 
     @Transactional
     public void deleteUser(UUID id){
+        requireOwnerOrAdmin(id);
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found."));
         user.setStatus(false);
         userRepository.save(user);
+    }
+
+    private void requireOwnerOrAdmin(UUID id) {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean admin = authentication != null && authentication.getAuthorities().stream()
+                .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
+        boolean owner = authentication != null && authentication.getPrincipal() instanceof User user && id.equals(user.getId());
+        if (!admin && !owner) throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.FORBIDDEN, "You cannot change another account");
     }
 
    /* public User getCurrentAuthenticatedUser() {

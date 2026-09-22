@@ -30,6 +30,9 @@ public class Artist {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(nullable = false)
+    private boolean blocked;
+
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(
@@ -44,7 +47,7 @@ public class Artist {
     private String bio;
 
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
-    private List<ArtistImage>artistImages;
+    private List<ArtistImage>artistImages = new java.util.ArrayList<>();
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant created_at;

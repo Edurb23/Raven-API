@@ -32,6 +32,7 @@ class ArtistImageVotingControllerTest {
     @MockBean ArtistImageVotingService voting;
     @MockBean TokenService tokenService;
     @MockBean UserRepository userRepository;
+    @MockBean com.portfolio.raven.service.AdminControlService adminControls;
 
     @Test
     void readsAndSavesVotesForTheAuthenticatedUserOnly() throws Exception {

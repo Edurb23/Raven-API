@@ -29,6 +29,9 @@ public class SecurityConfigurations {
     @Autowired
     private SecurityFilter securityFilter;
 
+    @Autowired
+    private com.portfolio.raven.service.AdminControlService adminControls;
+
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -49,7 +52,12 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorize -> authorize
                         .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/artist/*/images/*/select").hasRole("ADMIN")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/artist/*/images/*/vote").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/artist/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/artist/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/artist/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/artist/**").hasRole("ADMIN")
                         .requestMatchers(
                                 "/login/**",
                                 "/user/register",
@@ -59,7 +67,8 @@ public class SecurityConfigurations {
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(new AdminActivityFilter(adminControls), SecurityFilter.class);
 
         return http.build();
     }

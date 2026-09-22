@@ -21,12 +21,12 @@ public class ArtistImageVoteRepository {
 
     public boolean artistExists(UUID artistId) {
         return Boolean.TRUE.equals(jdbc.queryForObject(
-                "SELECT COUNT(*) > 0 FROM tb_raven_artists WHERE id = ?", Boolean.class, artistId.toString()));
+                "SELECT COUNT(*) > 0 FROM tb_raven_artists WHERE id = ? AND blocked = FALSE", Boolean.class, artistId.toString()));
     }
 
     // Serializes votes and elections for the same artist across server instances.
     public boolean lockArtist(UUID artistId) {
-        return !jdbc.queryForList("SELECT id FROM tb_raven_artists WHERE id = ? FOR UPDATE",
+        return !jdbc.queryForList("SELECT id FROM tb_raven_artists WHERE id = ? AND blocked = FALSE FOR UPDATE",
                 String.class, artistId.toString()).isEmpty();
     }
 
@@ -73,6 +73,7 @@ public class ArtistImageVoteRepository {
     public List<UUID> pendingArtists(LocalDate currentWeek) {
         return jdbc.query("""
                 SELECT DISTINCT v.artist_id FROM tb_raven_artist_image_votes v
+                JOIN tb_raven_artists a ON a.id = v.artist_id AND a.blocked = FALSE
                 WHERE v.week_start < ? AND NOT EXISTS (
                   SELECT 1 FROM tb_raven_artist_image_elections e
                   WHERE e.artist_id = v.artist_id AND e.week_start = v.week_start)

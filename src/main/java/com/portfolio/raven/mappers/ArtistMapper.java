@@ -48,8 +48,8 @@ public class ArtistMapper {
             artist.setName(dto.name());
         }
 
-        if (dto.name() != null && !dto.bio().isBlank()) {
-            artist.setName(dto.bio());
+        if (dto.bio() != null && !dto.bio().isBlank()) {
+            artist.setBio(dto.bio());
         }
     }
 

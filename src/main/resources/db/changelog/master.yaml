@@ -17,3 +17,5 @@ databaseChangeLog:
       file: db/changelog/007-selectable-artist-album-images.yaml
   - include:
       file: db/changelog/008-weekly-artist-image-votes.sql
+  - include:
+      file: db/changelog/009-admin-console.sql

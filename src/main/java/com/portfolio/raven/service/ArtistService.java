@@ -34,7 +34,7 @@ public class ArtistService {
 
     @Transactional(readOnly = true)
     public List<ArtistListDto> listAll(Pageable pageable){
-        return artistRepository.findAll(pageable)
+        return artistRepository.findByBlockedFalse(pageable)
                 .stream()
                 .map(artistMapper::toList)
                 .toList();
@@ -43,6 +43,7 @@ public class ArtistService {
     @Transactional(readOnly = true)
     public ArtistDetail findById(UUID id) {
         var artist = artistRepository.findWithGenres(id)
+                .filter(value -> !value.isBlocked())
                 .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(
                         org.springframework.http.HttpStatus.NOT_FOUND, "Artist or band not found."));
         return artistMapper.toDetailDto(artist);

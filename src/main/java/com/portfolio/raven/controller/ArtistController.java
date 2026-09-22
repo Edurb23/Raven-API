@@ -105,7 +105,6 @@ public class ArtistController {
             @PathVariable UUID id
     ) {
         ArtistDetail detail = artistService.findById(id);
-        System.out.println(detail.genres());
         return ResponseEntity.ok(detail);
     }
 
@@ -243,6 +242,8 @@ public class ArtistController {
         try {
             String imageUrl = artistImageService.saveImageAsBase64(dto.file(), dto.artistId());
             return ResponseEntity.ok(imageUrl);
+        } catch (org.springframework.web.server.ResponseStatusException e) {
+            throw e;
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Erro ao salvar a imagem: " + e.getMessage());
         }

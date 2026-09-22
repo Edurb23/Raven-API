@@ -38,9 +38,9 @@ class ArtistImageServiceTest {
     void shouldSaveFirstArtistImageAsSelected() {
         UUID artistId = UUID.randomUUID();
         Artist artist = artist(artistId, "Radiohead");
-        MockMultipartFile file = new MockMultipartFile("file", "image".getBytes());
+        MockMultipartFile file = new MockMultipartFile("file", java.util.Base64.getDecoder().decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aM1sAAAAASUVORK5CYII="));
 
-        when(artistRepository.findById(artistId)).thenReturn(Optional.of(artist));
+        when(artistRepository.findLockedById(artistId)).thenReturn(Optional.of(artist));
         when(artistImageRepository.findByArtistIdAndSelectedTrue(artistId)).thenReturn(Optional.empty());
 
         String response = artistImageService.saveImageAsBase64(file, artistId);
@@ -58,6 +58,7 @@ class ArtistImageServiceTest {
         ArtistImage other = artistImage(UUID.randomUUID(), artist, true);
 
         when(artistImageRepository.findById(imageId)).thenReturn(Optional.of(selected));
+        when(artistRepository.findLockedById(artistId)).thenReturn(Optional.of(artist));
         when(artistImageRepository.findByArtistId(artistId)).thenReturn(List.of(selected, other));
 
         String response = artistImageService.selectArtistImage(artistId, imageId);
