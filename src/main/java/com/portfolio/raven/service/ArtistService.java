@@ -40,9 +40,11 @@ public class ArtistService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
     public ArtistDetail findById(UUID id) {
         var artist = artistRepository.findWithGenres(id)
-                .orElseThrow(() -> new RuntimeException("Artist or band not found."));
+                .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(
+                        org.springframework.http.HttpStatus.NOT_FOUND, "Artist or band not found."));
         return artistMapper.toDetailDto(artist);
     }
 

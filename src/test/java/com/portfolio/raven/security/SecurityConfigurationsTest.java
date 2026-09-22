@@ -54,6 +54,15 @@ class SecurityConfigurationsTest {
         mvc.perform(get("/error")).andExpect(status().isUnauthorized());
     }
 
+    @Test
+    void weeklyVotingRequiresAuthenticationAndManualSelectionRequiresAdmin() throws Exception {
+        mvc.perform(get("/artist/artist-id/images/votes")).andExpect(status().isUnauthorized());
+        mvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/artist/artist-id/images/image-id/vote"))
+                .andExpect(status().isUnauthorized());
+        mvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/artist/artist-id/images/image-id/select")
+                .with(user("listener"))).andExpect(status().isForbidden());
+    }
+
     @RestController
     static class Endpoints {
         @GetMapping("/artist")

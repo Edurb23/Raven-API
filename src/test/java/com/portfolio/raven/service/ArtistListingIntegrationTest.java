@@ -35,5 +35,9 @@ class ArtistListingIntegrationTest {
                 () -> mapper.toList(detachedArtists.getContent().get(0)));
 
         assertDoesNotThrow(() -> objectMapper.writeValueAsString(service.listAll(page)));
+        var artistId = detachedArtists.getContent().get(0).getId();
+        var detail = service.findById(artistId);
+        org.junit.jupiter.api.Assertions.assertEquals(artistId, detail.id());
+        assertDoesNotThrow(() -> objectMapper.writeValueAsString(detail));
     }
 }

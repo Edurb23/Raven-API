@@ -49,6 +49,7 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorize -> authorize
                         .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/artist/*/images/*/select").hasRole("ADMIN")
                         .requestMatchers(
                                 "/login/**",
                                 "/user/register",

@@ -59,7 +59,7 @@ public class ArtistMapper {
                 .map(Genre::getName)
                 .collect(Collectors.toSet());
 
-        return new ArtistDetail(artist.getId(),artist.getName(), genreNames,artist.getBio(),artist.getArtistImages(), artist.getCreated_at(), artist.getUpdate_at());
+        return new ArtistDetail(artist.getId(),artist.getName(), genreNames,artist.getBio(),java.util.List.copyOf(artist.getArtistImages()), artist.getCreated_at(), artist.getUpdate_at());
     }
 
 

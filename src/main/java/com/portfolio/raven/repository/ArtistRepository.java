@@ -13,7 +13,7 @@ public interface ArtistRepository extends JpaRepository<Artist, UUID> {
 
     boolean existsByNameIgnoreCase(String name);
 
-    @Query("SELECT a FROM Artist a JOIN FETCH a.genres WHERE a.id = :id")
+    @Query("SELECT a FROM Artist a LEFT JOIN FETCH a.genres WHERE a.id = :id")
     Optional<Artist> findWithGenres(@Param("id") UUID id);
 
 }
