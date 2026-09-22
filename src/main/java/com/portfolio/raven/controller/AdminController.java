@@ -71,6 +71,12 @@ public class AdminController {
         return Map.of("message",images.selectArtistImage(id,imageId));
     }
 
+    @DeleteMapping("/artists/{id}/images/{imageId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removePhoto(@PathVariable UUID id, @PathVariable UUID imageId) {
+        images.removeImage(id, imageId);
+    }
+
     @PostMapping(value="/artists/{id}/banner", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     public Map<String,String> uploadBanner(@PathVariable UUID id, @RequestParam MultipartFile file) {
         controls.requireEnabled("artist_photo_uploads");

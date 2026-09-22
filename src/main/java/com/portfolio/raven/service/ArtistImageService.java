@@ -84,6 +84,26 @@ public class ArtistImageService {
     }
 
     @org.springframework.transaction.annotation.Transactional
+    public void removeImage(UUID artistId, UUID imageId) {
+        var artist = artistRepository.findLockedById(artistId)
+                .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND, "Artist not found"));
+        var image = artistImageRepository.findById(imageId)
+                .filter(value -> value.getArtist().getId().equals(artistId))
+                .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND, "Artist image not found"));
+
+        // Detach from the managed collection so cascading persistence cannot restore it.
+        artist.getArtistImages().removeIf(value -> value.getId().equals(imageId));
+        if (Boolean.TRUE.equals(image.getSelected())) {
+            artist.getArtistImages().stream()
+                    .min(java.util.Comparator.comparing(ArtistImage::getCreated_at)
+                            .thenComparing(value -> value.getId().toString()))
+                    .ifPresent(replacement -> replacement.setSelected(true));
+        }
+        // Foreign keys delete this image's votes and clear historical winner references.
+        artistImageRepository.delete(image);
+    }
+
+    @org.springframework.transaction.annotation.Transactional
     public String selectArtistImage(UUID artistId, UUID imageId) {
         artistRepository.findLockedById(artistId)
                 .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND, "Artist not found"));

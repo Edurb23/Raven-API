@@ -123,7 +123,62 @@ class AdminConsoleIntegrationTest {
                 .contentType("application/json").content("{\"enabled\":false}")).andExpect(status().isNotFound());
     }
 
+    @Test void adminCanRemovePhotosAndVotesWhilePreservingBannerAndElectionHistory() throws Exception {
+        String id=createArtist();
+        String image="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aM1sAAAAASUVORK5CYII=";
+        for(int i=0;i<3;i++) mvc.perform(multipart("/admin/artists/"+id+"/images")
+                .file(new MockMultipartFile("file","photo.png","image/png",Base64.getDecoder().decode(image)))
+                .with(user("admin").roles("ADMIN"))).andExpect(status().isOk());
+        entityManager.flush(); entityManager.clear();
+        List<String> photos=jdbc.queryForList("SELECT id FROM tb_raven_artist_image WHERE artist_id=? ORDER BY created_at,id",String.class,id);
+        String main=photos.get(0), oldest=photos.get(1), extra=photos.get(2);
+        jdbc.update("UPDATE tb_raven_artists SET banner_image=? WHERE id=?", image, id);
+        String voter=UUID.randomUUID().toString();
+        jdbc.update("INSERT INTO tb_raven_users(id,username,email,password,status,created_at) VALUES(?,?,?,?,TRUE,CURRENT_TIMESTAMP)",
+                voter,"Photo deletion test "+voter,voter+"@example.test","unused-test-hash");
+        jdbc.update("INSERT INTO tb_raven_artist_image_votes(artist_id,user_id,week_start,image_id,updated_at) VALUES(?,?,'2026-09-21',?,CURRENT_TIMESTAMP)", id,voter,main);
+        jdbc.update("INSERT INTO tb_raven_artist_image_elections(artist_id,week_start,winner_image_id,processed_at) VALUES(?,'2026-09-14',?,CURRENT_TIMESTAMP)",id,main);
+        // Removal is moderation, so disabling uploads must not prevent it.
+        jdbc.update("UPDATE tb_raven_feature_flags SET enabled=FALSE WHERE flag_key='artist_photo_uploads'");
+        mvc.perform(delete("/admin/artists/"+id+"/images/"+extra).with(user("admin").roles("ADMIN")))
+                .andExpect(status().isNoContent());
+        entityManager.flush(); entityManager.clear();
+        org.junit.jupiter.api.Assertions.assertEquals(main,jdbc.queryForObject("SELECT id FROM tb_raven_artist_image WHERE artist_id=? AND selected=TRUE",String.class,id));
+        mvc.perform(delete("/admin/artists/"+id+"/images/"+main).with(user("admin").roles("ADMIN")))
+                .andExpect(status().isNoContent());
+        entityManager.flush(); entityManager.clear();
+        org.junit.jupiter.api.Assertions.assertEquals(0,jdbc.queryForObject("SELECT COUNT(*) FROM tb_raven_artist_image_votes WHERE artist_id=?",Integer.class,id));
+        org.junit.jupiter.api.Assertions.assertEquals(1,jdbc.queryForObject("SELECT COUNT(*) FROM tb_raven_artist_image_elections WHERE artist_id=? AND winner_image_id IS NULL",Integer.class,id));
+        mvc.perform(get("/artist/"+id).with(user("listener"))).andExpect(status().isOk())
+                .andExpect(jsonPath("$.artistImages.length()").value(1))
+                .andExpect(jsonPath("$.artistImages[0].id").value(oldest))
+                .andExpect(jsonPath("$.artistImages[0].selected").value(true))
+                .andExpect(jsonPath("$.bannerImage").value(image));
+        mvc.perform(delete("/admin/artists/"+id+"/images/"+oldest).with(user("admin").roles("ADMIN")))
+                .andExpect(status().isNoContent());
+        entityManager.flush(); entityManager.clear();
+        mvc.perform(get("/artist/"+id).with(user("listener"))).andExpect(status().isOk())
+                .andExpect(jsonPath("$.artistImages").isEmpty()).andExpect(jsonPath("$.bannerImage").value(image));
+    }
+
+    @Test void cannotRemoveMissingPhotosOrPhotosFromAnotherArtist() throws Exception {
+        String id=createArtist(), other=createArtist();
+        byte[] png=Base64.getDecoder().decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aM1sAAAAASUVORK5CYII=");
+        mvc.perform(multipart("/admin/artists/"+other+"/images").file(new MockMultipartFile("file","photo.png","image/png",png))
+                .with(user("admin").roles("ADMIN"))).andExpect(status().isOk());
+        entityManager.flush(); entityManager.clear();
+        String photo=jdbc.queryForObject("SELECT id FROM tb_raven_artist_image WHERE artist_id=?",String.class,other);
+        mvc.perform(delete("/admin/artists/"+id+"/images/"+photo).with(user("admin").roles("ADMIN")))
+                .andExpect(status().isNotFound());
+        mvc.perform(delete("/admin/artists/"+id+"/images/"+UUID.randomUUID()).with(user("admin").roles("ADMIN")))
+                .andExpect(status().isNotFound());
+        org.junit.jupiter.api.Assertions.assertEquals(1,jdbc.queryForObject("SELECT COUNT(*) FROM tb_raven_artist_image WHERE id=?",Integer.class,photo));
+    }
+
     @Test void ordinaryUsersCannotAccessAdminOrLegacyArtistMutations() throws Exception {
+        String photoPath="/admin/artists/"+UUID.randomUUID()+"/images/"+UUID.randomUUID();
+        mvc.perform(delete(photoPath).with(user("listener"))).andExpect(status().isForbidden());
+        mvc.perform(delete(photoPath)).andExpect(status().isUnauthorized());
         String bannerPath="/admin/artists/"+UUID.randomUUID()+"/banner";
         mvc.perform(multipart(bannerPath).file(new MockMultipartFile("file","image".getBytes()))
                 .with(user("listener"))).andExpect(status().isForbidden());

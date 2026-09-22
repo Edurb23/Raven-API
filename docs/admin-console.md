@@ -14,6 +14,14 @@ next completed weekly election can change the main photo again.
 Uploads accept JPEG, PNG and GIF files up to 5 MB. Photo upload and selection
 transactions lock the artist to serialize changes with weekly elections.
 
+`DELETE /admin/artists/{id}/images/{imageId}` removes a gallery photo (admin only).
+The image must belong to that artist. Deletion locks the artist, removes associated
+votes via the existing foreign keys and clears historical winner references while
+preserving election records. If the main photo is removed, the oldest remaining
+photo becomes the main photo; with no photos left, the UI shows its empty state.
+Custom backgrounds are independent and stay unchanged. Removal remains available
+when uploads are disabled.
+
 Artist backgrounds are separate from gallery photos and weekly elections.
 `POST /admin/artists/{id}/banner` uploads multipart `file` with the same format,
 size and feature flag checks as photo uploads. `DELETE /admin/artists/{id}/banner`
