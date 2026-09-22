@@ -78,6 +78,35 @@ class AdminConsoleIntegrationTest {
                 .with(user("admin").roles("ADMIN"))).andExpect(status().isBadRequest());
     }
 
+    @Test void adminCanPersistReplaceAndRemoveBackgroundWithoutChangingGallery() throws Exception {
+        String id=createArtist();
+        String base64="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aM1sAAAAASUVORK5CYII=";
+        byte[] png=Base64.getDecoder().decode(base64);
+        mvc.perform(multipart("/admin/artists/"+id+"/images")
+                .file(new MockMultipartFile("file","photo.png","image/png",png)).with(user("admin").roles("ADMIN")))
+                .andExpect(status().isOk());
+        for (String background : List.of(base64, "R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7")) {
+            mvc.perform(multipart("/admin/artists/"+id+"/banner")
+                    .file(new MockMultipartFile("file","background", "application/octet-stream",Base64.getDecoder().decode(background)))
+                    .with(user("admin").roles("ADMIN"))).andExpect(status().isOk());
+            entityManager.flush(); entityManager.clear();
+            mvc.perform(get("/artist/"+id).with(user("listener")))
+                    .andExpect(status().isOk()).andExpect(jsonPath("$.bannerImage").value(background))
+                    .andExpect(jsonPath("$.artistImages.length()").value(1))
+                    .andExpect(jsonPath("$.artistImages[0].selected").value(true))
+                    .andExpect(jsonPath("$.artistImages[0].urlImage").value(base64));
+        }
+        mvc.perform(multipart("/admin/artists/"+id+"/banner")
+                .file(new MockMultipartFile("file","fake.png","image/png","invalid".getBytes()))
+                .with(user("admin").roles("ADMIN"))).andExpect(status().isBadRequest());
+        mvc.perform(delete("/admin/artists/"+id+"/banner").with(user("admin").roles("ADMIN")))
+                .andExpect(status().isNoContent());
+        entityManager.flush(); entityManager.clear();
+        mvc.perform(get("/artist/"+id).with(user("listener")))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.bannerImage").isEmpty())
+                .andExpect(jsonPath("$.artistImages.length()").value(1));
+    }
+
     @Test void featureFlagsEnforceServerBehaviorAndKeepAdminAccessible() throws Exception {
         String id=createArtist();
         mvc.perform(put("/admin/flags/artist_catalog").with(user("admin").roles("ADMIN"))
@@ -88,11 +117,17 @@ class AdminConsoleIntegrationTest {
                 .contentType("application/json").content("{\"enabled\":false}")).andExpect(status().isOk());
         mvc.perform(multipart("/admin/artists/"+id+"/images").file(new MockMultipartFile("file","image".getBytes()))
                 .with(user("admin").roles("ADMIN"))).andExpect(status().isServiceUnavailable());
+        mvc.perform(multipart("/admin/artists/"+id+"/banner").file(new MockMultipartFile("file","image".getBytes()))
+                .with(user("admin").roles("ADMIN"))).andExpect(status().isServiceUnavailable());
         mvc.perform(put("/admin/flags/unknown").with(user("admin").roles("ADMIN"))
                 .contentType("application/json").content("{\"enabled\":false}")).andExpect(status().isNotFound());
     }
 
     @Test void ordinaryUsersCannotAccessAdminOrLegacyArtistMutations() throws Exception {
+        String bannerPath="/admin/artists/"+UUID.randomUUID()+"/banner";
+        mvc.perform(multipart(bannerPath).file(new MockMultipartFile("file","image".getBytes()))
+                .with(user("listener"))).andExpect(status().isForbidden());
+        mvc.perform(delete(bannerPath).with(user("listener"))).andExpect(status().isForbidden());
         for(String path:List.of("/admin/artists","/admin/flags","/admin/logs","/admin/genres")) {
             mvc.perform(get(path).with(user("listener"))).andExpect(status().isForbidden());
             mvc.perform(get(path)).andExpect(status().isUnauthorized());

@@ -23,21 +23,7 @@ public class ArtistImageService {
     @org.springframework.transaction.annotation.Transactional
     public String saveImageAsBase64(MultipartFile file, UUID artistId){
         try {
-            if (file == null || file.isEmpty() || file.getSize() > 5 * 1024 * 1024) {
-                throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "Choose an image up to 5 MB");
-            }
-            try (var input = javax.imageio.ImageIO.createImageInputStream(file.getInputStream())) {
-                var readers = javax.imageio.ImageIO.getImageReaders(input);
-                if (!readers.hasNext()) throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "Choose a JPEG, PNG or GIF image");
-                var reader = readers.next();
-                try {
-                    if (!java.util.Set.of("jpeg", "jpg", "png", "gif").contains(reader.getFormatName().toLowerCase(java.util.Locale.ROOT)))
-                        throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "Choose a JPEG, PNG or GIF image");
-                    reader.setInput(input);
-                    if ((long) reader.getWidth(0) * reader.getHeight(0) > 40_000_000L)
-                        throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "Image dimensions are too large");
-                } finally { reader.dispose(); }
-            }
+            validateImage(file);
             Artist artist = artistRepository.findLockedById(artistId)
                     .orElseThrow(() -> new RuntimeException("Artist not found with ID: " + artistId));
 
@@ -58,6 +44,43 @@ public class ArtistImageService {
         } catch (IOException e) {
             throw new RuntimeException("Error converting image to Base64:  " + e.getMessage());
         }
+    }
+
+    private void validateImage(MultipartFile file) throws IOException {
+        if (file == null || file.isEmpty() || file.getSize() > 5 * 1024 * 1024) {
+            throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "Choose an image up to 5 MB");
+        }
+        try (var input = javax.imageio.ImageIO.createImageInputStream(file.getInputStream())) {
+            var readers = javax.imageio.ImageIO.getImageReaders(input);
+            if (!readers.hasNext()) throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "Choose a JPEG, PNG or GIF image");
+            var reader = readers.next();
+            try {
+                if (!java.util.Set.of("jpeg", "jpg", "png", "gif").contains(reader.getFormatName().toLowerCase(java.util.Locale.ROOT)))
+                    throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "Choose a JPEG, PNG or GIF image");
+                reader.setInput(input);
+                if ((long) reader.getWidth(0) * reader.getHeight(0) > 40_000_000L)
+                    throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "Image dimensions are too large");
+            } finally { reader.dispose(); }
+        }
+    }
+
+    @org.springframework.transaction.annotation.Transactional
+    public void saveBanner(MultipartFile file, UUID artistId) {
+        try {
+            validateImage(file);
+            var artist = artistRepository.findLockedById(artistId)
+                    .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND, "Artist not found"));
+            artist.setBannerImage(Base64.getEncoder().encodeToString(file.getBytes()));
+        } catch (IOException e) {
+            throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "Could not read the image", e);
+        }
+    }
+
+    @org.springframework.transaction.annotation.Transactional
+    public void removeBanner(UUID artistId) {
+        var artist = artistRepository.findLockedById(artistId)
+                .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND, "Artist not found"));
+        artist.setBannerImage(null);
     }
 
     @org.springframework.transaction.annotation.Transactional

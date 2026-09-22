@@ -10,10 +10,10 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public record ArtistDetail(UUID id, String name, Set<String> genres, String bio, List<ArtistImage>artistImages, Instant created_at, Instant update_at) {
+public record ArtistDetail(UUID id, String name, Set<String> genres, String bio, List<ArtistImage>artistImages, Instant created_at, Instant update_at, String bannerImage) {
 
    public ArtistDetail(Artist artist){
-        this(artist.getId(), artist.getName(), artist.getGenres().stream().map(Genre::getName).collect(Collectors.toSet()), artist.getBio(), artist.getArtistImages(), artist.getCreated_at(), artist.getUpdate_at());
+        this(artist.getId(), artist.getName(), artist.getGenres().stream().map(Genre::getName).collect(Collectors.toSet()), artist.getBio(), artist.getArtistImages(), artist.getCreated_at(), artist.getUpdate_at(), artist.getBannerImage());
    }
 
 }

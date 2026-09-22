@@ -14,6 +14,16 @@ next completed weekly election can change the main photo again.
 Uploads accept JPEG, PNG and GIF files up to 5 MB. Photo upload and selection
 transactions lock the artist to serialize changes with weekly elections.
 
+Artist backgrounds are separate from gallery photos and weekly elections.
+`POST /admin/artists/{id}/banner` uploads multipart `file` with the same format,
+size and feature flag checks as photo uploads. `DELETE /admin/artists/{id}/banner`
+restores the main-photo fallback. Both endpoints require `ROLE_ADMIN`.
+The detail response includes nullable `bannerImage` (original Base64 bytes);
+list responses omit it. Migration `010-artist-banner.sql` adds the column.
+The admin preview shows the source dimensions and warns below 1920 x 720 px.
+For this layout, use a sharp landscape original around 2560 x 960 px (8:3),
+with the subject near the center to accommodate responsive cropping.
+
 Feature flags persist in `tb_raven_feature_flags`:
 
 - `artist_catalog`: public artist catalog, detail and photo-voting reads.

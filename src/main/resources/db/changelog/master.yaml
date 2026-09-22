@@ -19,3 +19,5 @@ databaseChangeLog:
       file: db/changelog/008-weekly-artist-image-votes.sql
   - include:
       file: db/changelog/009-admin-console.sql
+  - include:
+      file: db/changelog/010-artist-banner.sql

@@ -33,6 +33,10 @@ public class Artist {
     @Column(nullable = false)
     private boolean blocked;
 
+    @Lob
+    @Column(name = "banner_image", columnDefinition = "MEDIUMTEXT")
+    private String bannerImage;
+
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(
