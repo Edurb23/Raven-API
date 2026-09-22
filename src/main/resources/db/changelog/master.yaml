@@ -21,3 +21,11 @@ databaseChangeLog:
       file: db/changelog/009-admin-console.sql
   - include:
       file: db/changelog/010-artist-banner.sql
+  - include:
+      file: db/changelog/011-kpopinsert-artists.yaml
+  - include:
+      file: db/changelog/012-popinsert-artists.yaml
+  - include:
+      file: db/changelog/013-rockinsert-artists.yaml
+  - include:
+      file: db/changelog/014-outros-generos-insert-artists.yaml

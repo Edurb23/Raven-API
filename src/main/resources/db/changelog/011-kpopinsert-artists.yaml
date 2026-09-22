@@ -1,0 +1,137 @@
+databaseChangeLog:
+  - changeSet:
+      id: KPOPINSERT-artistas
+      author: edu
+      changes:
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'CORTIS' } },
+          { column: { name: bio, value: 'CORTIS e um grupo de K-pop com identidade jovem, energia de performance e sonoridade pop voltada para uma nova geracao de fas.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'BTS' } },
+          { column: { name: bio, value: 'BTS e um dos maiores grupos de K-pop da historia, conhecido por impacto global, letras emotivas, performances marcantes e uma conexao poderosa com seus fas.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Stray Kids' } },
+          { column: { name: bio, value: 'Stray Kids se destaca no K-pop por producao autoral, energia intensa e uma mistura de rap, EDM e pop que construiu uma base global de fas.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'IVE' } },
+          { column: { name: bio, value: 'IVE e um grupo feminino de K-pop conhecido por conceito elegante, melodias fortes e hits que consolidaram sua presenca nas paradas coreanas e internacionais.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'ITZY' } },
+          { column: { name: bio, value: 'ITZY e um grupo feminino de K-pop marcado por atitude, coreografias fortes e mensagens de autoconfianca que definiram sua identidade desde o debut.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'KISS OF LIFE' } },
+          { column: { name: bio, value: 'KISS OF LIFE e um grupo feminino de K-pop reconhecido por vocais marcantes, presenca de palco e uma sonoridade que mistura pop, R&B e dance.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: "Girls' Generation" } },
+          { column: { name: bio, value: "Girls' Generation e um dos grupos femininos mais importantes do K-pop, ajudando a popularizar o genero mundialmente com hits iconicos e grande influencia cultural." } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Wonder Girls' } },
+          { column: { name: bio, value: 'Wonder Girls foi um grupo feminino essencial para a expansao internacional do K-pop, unindo pop retro, carisma e hits que marcaram uma geracao.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'LISA' } },
+          { column: { name: bio, value: 'LISA e uma artista tailandesa e integrante do BLACKPINK, reconhecida por danca precisa, rap carismatico, moda e grande impacto global em carreira solo.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'ROSE' } },
+          { column: { name: bio, value: 'ROSE e cantora neozelandesa-coreana e integrante do BLACKPINK, conhecida por voz expressiva, sensibilidade pop-rock e forte presenca em carreira solo.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'JISOO' } },
+          { column: { name: bio, value: 'JISOO e cantora, atriz e integrante do BLACKPINK, conhecida por timbre unico, elegancia visual e uma carreira solo que reforcou sua identidade artistica.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'XG' } },
+          { column: { name: bio, value: 'XG e um grupo feminino global com base no pop asiatico, conhecido por rap afiado, coreografias precisas e sonoridade que mistura R&B, hip-hop e dance.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'i-dle' } },
+          { column: { name: bio, value: 'i-dle e um grupo feminino de K-pop conhecido por conceito autoral, versatilidade musical e identidade forte em cada lancamento.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Red Velvet' } },
+          { column: { name: bio, value: 'Red Velvet e um grupo feminino de K-pop famoso por alternar conceitos vibrantes e sofisticados, combinando pop experimental, R&B e vocais refinados.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+        - insert: { tableName: tb_raven_artists, columns: [
+          { column: { name: id, valueComputed: UUID() } },
+          { column: { name: name, value: 'Mamamoo' } },
+          { column: { name: bio, value: 'Mamamoo e um grupo feminino de K-pop reconhecido por vocais poderosos, presenca de palco carismatica e mistura de pop, jazz, R&B e soul.' } },
+          { column: { name: created_at, value: '2025-01-01 00:00:00' } },
+          { column: { name: update_at, value: '2025-01-01 00:00:00' } }
+        ] }
+
+  - changeSet:
+      id: KPOPINSERT-artistas-generos
+      author: edu
+      changes:
+        - sql:
+            splitStatements: true
+            stripComments: true
+            sql: |
+              INSERT INTO tb_raven_genero_artist (artist_id, genero_id)
+              SELECT a.id, g.id FROM tb_raven_artists a, tb_raven_genero g
+              WHERE a.name IN ('CORTIS', 'BTS', 'Stray Kids', 'IVE', 'ITZY', 'KISS OF LIFE', 'Girls'' Generation', 'Wonder Girls', 'LISA', 'ROSE', 'JISOO', 'XG', 'i-dle', 'Red Velvet', 'Mamamoo')
+                AND g.nome = 'K-Pop';
