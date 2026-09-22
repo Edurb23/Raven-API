@@ -69,7 +69,9 @@ public class ArtistMapper {
                 .map(Genre::getName)
                 .collect(Collectors.toSet());
 
-        return  new ArtistListDto(artist.getId(),artist.getName(), genreNames,artist.getBio(),artist.getArtistImages(),  artist.getCreated_at(), artist.getUpdate_at());
+        // Materialize images while the service transaction is still open.
+        var images = java.util.List.copyOf(artist.getArtistImages());
+        return new ArtistListDto(artist.getId(), artist.getName(), genreNames, artist.getBio(), images, artist.getCreated_at(), artist.getUpdate_at());
     }
 
 

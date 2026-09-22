@@ -70,6 +70,17 @@ public class UserController {
         return ok(ListUser);
     }
 
+    @GetMapping("/me")
+    @Operation(
+            summary = "Get current user",
+            description = "Returns the authenticated user details from the bearer token."
+    )
+    @SecurityRequirement(name = "bearerAuth")
+    public ResponseEntity<UserDetail> getCurrentUser(){
+        var userDetail = userService.getCurrentUser();
+        return ok(userDetail);
+    }
+
     @GetMapping("{id}")
     @Operation(
             summary = "Get user by id",

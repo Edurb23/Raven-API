@@ -32,6 +32,7 @@ public class ArtistService {
     private GenresRepository genreRepository;
 
 
+    @Transactional(readOnly = true)
     public List<ArtistListDto> listAll(Pageable pageable){
         return artistRepository.findAll(pageable)
                 .stream()

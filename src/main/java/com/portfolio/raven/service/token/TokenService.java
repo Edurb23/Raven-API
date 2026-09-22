@@ -14,7 +14,7 @@ import java.time.Instant;
 @Service
 public class TokenService {
 
-    @Value("$(api.token.secret)")
+    @Value("${api.token.secret:raven-dev-secret}")
     private String passwordToken;
 
     public String generateToken(User user) {
