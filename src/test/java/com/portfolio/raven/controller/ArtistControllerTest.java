@@ -80,7 +80,7 @@ class ArtistControllerTest {
                 "English rock band",
                 List.of(),
                 Instant.parse("2025-01-01T00:00:00Z"),
-                Instant.parse("2025-01-02T00:00:00Z"), null
+                Instant.parse("2025-01-02T00:00:00Z")
         );
 
         when(artistService.listAll(any(Pageable.class))).thenReturn(List.of(artist));
@@ -136,7 +136,7 @@ class ArtistControllerTest {
                 "American rock band",
                 List.of(),
                 Instant.parse("2025-01-01T00:00:00Z"),
-                Instant.parse("2025-01-02T00:00:00Z")
+                Instant.parse("2025-01-02T00:00:00Z"), null
         );
 
         when(artistService.register(any(RegisterArtistDto.class))).thenReturn(detail);
